@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Sn5p6yD0/qM=",
+  "success": true,
+  "projectFilePath": "D:\\github\\Kopia-Backup\\CLI\\KopiaBackup\\KopiaBackup\\KopiaBackup.csproj",
+  "expectedPackageFiles": [
+    "D:\\packages\\NuGet\\cache\\microsoft.dotnet.ilcompiler\\9.0.0-rc.2.24473.5\\microsoft.dotnet.ilcompiler.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "D:\\packages\\NuGet\\cache\\microsoft.net.illink.tasks\\9.0.0-rc.2.24473.5\\microsoft.net.illink.tasks.9.0.0-rc.2.24473.5.nupkg.sha512",
+    "D:\\packages\\NuGet\\cache\\runtime.win-x64.microsoft.dotnet.ilcompiler\\9.0.0-rc.2.24473.5\\runtime.win-x64.microsoft.dotnet.ilcompiler.9.0.0-rc.2.24473.5.nupkg.sha512"
+  ],
+  "logs": []
+}
