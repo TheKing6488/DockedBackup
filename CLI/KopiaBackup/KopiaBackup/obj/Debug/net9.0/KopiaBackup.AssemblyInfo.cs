@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KopiaBackup")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba58ec85e2730a62e3fa437b9c5907c874d729f7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22fb67416d6dc268a7882bd2912f658e89eb78dc")]
 [assembly: System.Reflection.AssemblyProductAttribute("KopiaBackup")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KopiaBackup")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		compose.yaml = compose.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KopiaBackupTest", "KopiaBackupTest\KopiaBackupTest.csproj", "{77C6946C-BBB7-4713-90C3-D57C3E2A6D1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,5 +19,9 @@ Global
 		{5D176FB3-6D0B-4CE4-B9D6-0E06ABE789DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D176FB3-6D0B-4CE4-B9D6-0E06ABE789DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D176FB3-6D0B-4CE4-B9D6-0E06ABE789DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C6946C-BBB7-4713-90C3-D57C3E2A6D1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C6946C-BBB7-4713-90C3-D57C3E2A6D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C6946C-BBB7-4713-90C3-D57C3E2A6D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C6946C-BBB7-4713-90C3-D57C3E2A6D1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

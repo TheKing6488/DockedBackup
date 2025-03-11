@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Sn5p6yD0/qM=",
+  "dgSpecHash": "UbhgcAYQJGQ=",
   "success": true,
-  "projectFilePath": "D:\\github\\Kopia-Backup\\CLI\\KopiaBackup\\KopiaBackup\\KopiaBackup.csproj",
+  "projectFilePath": "/home/tobias/Dokumente/Git/Kopia-Backup/CLI/KopiaBackup/KopiaBackup/KopiaBackup.csproj",
   "expectedPackageFiles": [
-    "D:\\packages\\NuGet\\cache\\microsoft.dotnet.ilcompiler\\9.0.0-rc.2.24473.5\\microsoft.dotnet.ilcompiler.9.0.0-rc.2.24473.5.nupkg.sha512",
-    "D:\\packages\\NuGet\\cache\\microsoft.net.illink.tasks\\9.0.0-rc.2.24473.5\\microsoft.net.illink.tasks.9.0.0-rc.2.24473.5.nupkg.sha512",
-    "D:\\packages\\NuGet\\cache\\runtime.win-x64.microsoft.dotnet.ilcompiler\\9.0.0-rc.2.24473.5\\runtime.win-x64.microsoft.dotnet.ilcompiler.9.0.0-rc.2.24473.5.nupkg.sha512"
+    "/home/tobias/.nuget/packages/commandlineparser/2.9.1/commandlineparser.2.9.1.nupkg.sha512",
+    "/home/tobias/.nuget/packages/microsoft.dotnet.ilcompiler/9.0.0/microsoft.dotnet.ilcompiler.9.0.0.nupkg.sha512",
+    "/home/tobias/.nuget/packages/microsoft.net.illink.tasks/9.0.0/microsoft.net.illink.tasks.9.0.0.nupkg.sha512",
+    "/home/tobias/.nuget/packages/runtime.linux-x64.microsoft.dotnet.ilcompiler/9.0.0/runtime.linux-x64.microsoft.dotnet.ilcompiler.9.0.0.nupkg.sha512"
   ],
   "logs": []
 }

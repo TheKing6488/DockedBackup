@@ -2,13 +2,26 @@
   "version": 3,
   "targets": {
     "net9.0": {
-      "Microsoft.DotNet.ILCompiler/9.0.0-rc.2.24473.5": {
+      "CommandLineParser/2.9.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/CommandLine.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/CommandLine.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.DotNet.ILCompiler/9.0.0": {
         "type": "package",
         "build": {
           "build/Microsoft.DotNet.ILCompiler.props": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.0-rc.2.24473.5": {
+      "Microsoft.NET.ILLink.Tasks/9.0.0": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -17,10 +30,32 @@
     }
   },
   "libraries": {
-    "Microsoft.DotNet.ILCompiler/9.0.0-rc.2.24473.5": {
-      "sha512": "+4KH+fbuWXX+I1nM+iP84N0nnorwxY3N8SrNLDNdWdblCPcWXSZnnst/IS+NEHTavnoTErwFNwk7IP8rPrNAQA==",
+    "CommandLineParser/2.9.1": {
+      "sha512": "OE0sl1/sQ37bjVsPKKtwQlWDgqaxWgtme3xZz7JssWUzg5JpMIyHgCTY9MVMxOg48fJ1AgGT3tgdH5m/kQ5xhA==",
       "type": "package",
-      "path": "microsoft.dotnet.ilcompiler/9.0.0-rc.2.24473.5",
+      "path": "commandlineparser/2.9.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CommandLine20.png",
+        "License.md",
+        "README.md",
+        "commandlineparser.2.9.1.nupkg.sha512",
+        "commandlineparser.nuspec",
+        "lib/net40/CommandLine.dll",
+        "lib/net40/CommandLine.xml",
+        "lib/net45/CommandLine.dll",
+        "lib/net45/CommandLine.xml",
+        "lib/net461/CommandLine.dll",
+        "lib/net461/CommandLine.xml",
+        "lib/netstandard2.0/CommandLine.dll",
+        "lib/netstandard2.0/CommandLine.xml"
+      ]
+    },
+    "Microsoft.DotNet.ILCompiler/9.0.0": {
+      "sha512": "bbnlV2PbUmCQ8Ndpx0kJaicLyV28IU+4IzyctQLL57+DxrHurYr2qsJrC8+yD44Q0DyPfv2oM168c1Tk6Bxbmg==",
+      "type": "package",
+      "path": "microsoft.dotnet.ilcompiler/9.0.0",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -39,17 +74,17 @@
         "build/NativeAOT.natvis",
         "build/WindowsAPIs.txt",
         "build/findvcvarsall.bat",
-        "microsoft.dotnet.ilcompiler.9.0.0-rc.2.24473.5.nupkg.sha512",
+        "microsoft.dotnet.ilcompiler.9.0.0.nupkg.sha512",
         "microsoft.dotnet.ilcompiler.nuspec",
         "runtime.json",
         "tools/netstandard/ILCompiler.Build.Tasks.deps.json",
         "tools/netstandard/ILCompiler.Build.Tasks.dll"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/9.0.0-rc.2.24473.5": {
-      "sha512": "mXyCgKqBIo/KOpY09FqjOU8d+LME2qowzzvBd1/viYmSpAKYfQ2w1WDOlh0FniY4xnrB/wmDiAo4frJvfCqT0w==",
+    "Microsoft.NET.ILLink.Tasks/9.0.0": {
+      "sha512": "zAwp213evC3UkimtVXRb+Dlgc/40QG145nmZDtp2LO9zJJMfrp+i/87BnXN7tRXEA4liyzdFkjqG1HE8/RPb4A==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/9.0.0-rc.2.24473.5",
+      "path": "microsoft.net.illink.tasks/9.0.0",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -63,7 +98,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.9.0.0-rc.2.24473.5.nupkg.sha512",
+        "microsoft.net.illink.tasks.9.0.0.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -100,24 +135,25 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Microsoft.DotNet.ILCompiler >= 9.0.0-rc.2.24473.5",
-      "Microsoft.NET.ILLink.Tasks >= 9.0.0-rc.2.24473.5"
+      "CommandLineParser >= 2.9.1",
+      "Microsoft.DotNet.ILCompiler >= 9.0.0",
+      "Microsoft.NET.ILLink.Tasks >= 9.0.0"
     ]
   },
   "packageFolders": {
-    "D:\\packages\\NuGet\\cache": {}
+    "/home/tobias/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\github\\Kopia-Backup\\CLI\\KopiaBackup\\KopiaBackup\\KopiaBackup.csproj",
+      "projectUniqueName": "/home/tobias/Dokumente/Git/Kopia-Backup/CLI/KopiaBackup/KopiaBackup/KopiaBackup.csproj",
       "projectName": "KopiaBackup",
-      "projectPath": "D:\\github\\Kopia-Backup\\CLI\\KopiaBackup\\KopiaBackup\\KopiaBackup.csproj",
-      "packagesPath": "D:\\packages\\NuGet\\cache",
-      "outputPath": "D:\\github\\Kopia-Backup\\CLI\\KopiaBackup\\KopiaBackup\\obj\\",
+      "projectPath": "/home/tobias/Dokumente/Git/Kopia-Backup/CLI/KopiaBackup/KopiaBackup/KopiaBackup.csproj",
+      "packagesPath": "/home/tobias/.nuget/packages/",
+      "outputPath": "/home/tobias/Dokumente/Git/Kopia-Backup/CLI/KopiaBackup/KopiaBackup/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tobia\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/tobias/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -147,16 +183,20 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "CommandLineParser": {
+            "target": "Package",
+            "version": "[2.9.1, )"
+          },
           "Microsoft.DotNet.ILCompiler": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.0-rc.2.24473.5, )",
+            "version": "[9.0.0, )",
             "autoReferenced": true
           },
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.0-rc.2.24473.5, )",
+            "version": "[9.0.0, )",
             "autoReferenced": true
           }
         },
@@ -173,8 +213,8 @@
         "warn": true,
         "downloadDependencies": [
           {
-            "name": "runtime.win-x64.Microsoft.DotNet.ILCompiler",
-            "version": "[9.0.0-rc.2.24473.5, 9.0.0-rc.2.24473.5]"
+            "name": "runtime.linux-x64.Microsoft.DotNet.ILCompiler",
+            "version": "[9.0.0, 9.0.0]"
           }
         ],
         "frameworkReferences": {
@@ -182,7 +222,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100-rc.2.24474.11/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/tobias/.dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\github\\Kopia-Backup\\CLI\\KopiaBackup\\KopiaBackup\\KopiaBackup.csproj": {}
+    "/home/tobias/Dokumente/Git/Kopia-Backup/CLI/KopiaBackup/KopiaBackup/KopiaBackup.csproj": {}
   },
   "projects": {
-    "D:\\github\\Kopia-Backup\\CLI\\KopiaBackup\\KopiaBackup\\KopiaBackup.csproj": {
+    "/home/tobias/Dokumente/Git/Kopia-Backup/CLI/KopiaBackup/KopiaBackup/KopiaBackup.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\Kopia-Backup\\CLI\\KopiaBackup\\KopiaBackup\\KopiaBackup.csproj",
+        "projectUniqueName": "/home/tobias/Dokumente/Git/Kopia-Backup/CLI/KopiaBackup/KopiaBackup/KopiaBackup.csproj",
         "projectName": "KopiaBackup",
-        "projectPath": "D:\\github\\Kopia-Backup\\CLI\\KopiaBackup\\KopiaBackup\\KopiaBackup.csproj",
-        "packagesPath": "D:\\packages\\NuGet\\cache",
-        "outputPath": "D:\\github\\Kopia-Backup\\CLI\\KopiaBackup\\KopiaBackup\\obj\\",
+        "projectPath": "/home/tobias/Dokumente/Git/Kopia-Backup/CLI/KopiaBackup/KopiaBackup/KopiaBackup.csproj",
+        "packagesPath": "/home/tobias/.nuget/packages/",
+        "outputPath": "/home/tobias/Dokumente/Git/Kopia-Backup/CLI/KopiaBackup/KopiaBackup/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\tobia\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/tobias/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -44,16 +44,20 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "CommandLineParser": {
+              "target": "Package",
+              "version": "[2.9.1, )"
+            },
             "Microsoft.DotNet.ILCompiler": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0-rc.2.24473.5, )",
+              "version": "[9.0.0, )",
               "autoReferenced": true
             },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.0-rc.2.24473.5, )",
+              "version": "[9.0.0, )",
               "autoReferenced": true
             }
           },
@@ -70,8 +74,8 @@
           "warn": true,
           "downloadDependencies": [
             {
-              "name": "runtime.win-x64.Microsoft.DotNet.ILCompiler",
-              "version": "[9.0.0-rc.2.24473.5, 9.0.0-rc.2.24473.5]"
+              "name": "runtime.linux-x64.Microsoft.DotNet.ILCompiler",
+              "version": "[9.0.0, 9.0.0]"
             }
           ],
           "frameworkReferences": {
@@ -79,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100-rc.2.24474.11/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/tobias/.dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
