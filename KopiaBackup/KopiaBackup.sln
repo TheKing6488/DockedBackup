@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KopiaBackup.Lib", "KopiaBackup.Lib\KopiaBackup.Lib.csproj", "{5D9B00E6-F4B1-4F5E-94BA-C81904165CE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KopiaBackup.Tests", "KopiaBackup.Tests\KopiaBackup.Tests.csproj", "{207855E9-8ABF-4BC7-88AB-84422203CB33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D9B00E6-F4B1-4F5E-94BA-C81904165CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D9B00E6-F4B1-4F5E-94BA-C81904165CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D9B00E6-F4B1-4F5E-94BA-C81904165CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D9B00E6-F4B1-4F5E-94BA-C81904165CE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{207855E9-8ABF-4BC7-88AB-84422203CB33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{207855E9-8ABF-4BC7-88AB-84422203CB33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{207855E9-8ABF-4BC7-88AB-84422203CB33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{207855E9-8ABF-4BC7-88AB-84422203CB33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
