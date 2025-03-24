@@ -2,7 +2,8 @@
 
 public class UserSettings 
 {
-    public string BackupDeviceName {
+    public DayOfWeek Day { get; set; }
+    public List<string> BackupDeviceNames {
         get;
         set;
     }
