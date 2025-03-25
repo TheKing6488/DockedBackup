@@ -9,9 +9,15 @@ public class RcloneHelperTests
     [Fact]
     public void IsRcloneInstalled_ReturnsTrue_WhenRcloneIsInstalled()
     {
-        bool isInstalled = RcloneHelper.IsRcloneInstalled();
-
+        var isInstalled = RcloneHelper.IsRcloneInstalled();
         isInstalled.ShouldBeTrue("rclone should be installed for this test to be successful.");
     }
 #endif
+
+    [Fact]
+    public void IsRcloneInstalled_ReturnsFalse_WhenRcloneIsNotInstalled()
+    {
+        RcloneHelper rcloneHelper = new();
+         rcloneHelper.RcloneConfigAsync();
+    }
 }

@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KopiaBackup.Lib", "KopiaBac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KopiaBackup.Tests", "KopiaBackup.Tests\KopiaBackup.Tests.csproj", "{207855E9-8ABF-4BC7-88AB-84422203CB33}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KopiaBackup.Console", "KopiaBackup.Console\KopiaBackup.Console.csproj", "{EB72B464-39EF-4F1D-888C-6EC395975145}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{207855E9-8ABF-4BC7-88AB-84422203CB33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{207855E9-8ABF-4BC7-88AB-84422203CB33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{207855E9-8ABF-4BC7-88AB-84422203CB33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB72B464-39EF-4F1D-888C-6EC395975145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB72B464-39EF-4F1D-888C-6EC395975145}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB72B464-39EF-4F1D-888C-6EC395975145}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB72B464-39EF-4F1D-888C-6EC395975145}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
