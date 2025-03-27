@@ -21,9 +21,13 @@ public static class ServiceCollectionExtensions
         
         //Helpers
         services.AddSingleton<IResourceLocalizerHelper, ResourceLocalizerHelper>();
+        services.AddSingleton<IKopiaHelper, KopiaHelper>();
+        services.AddSingleton<IRcloneHelper, RcloneHelper>();
+
         //Services
         services.AddSingleton<ISettingsManager, SettingsManager>();
         services.AddSingleton<IBackupService, BackupService>();
+        services.AddSingleton<IFolderWatcherService>(provider => new FolderWatcherService($"/run/media/{Environment.UserName}", provider.GetRequiredService<IBackupService>()));
         return services;
     }
 }

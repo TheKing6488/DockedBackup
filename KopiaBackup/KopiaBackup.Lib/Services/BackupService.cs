@@ -11,7 +11,7 @@ public class BackupService(ISettingsManager settingsManager) : IBackupService
     
     public void InitializeDevice(string devicePath)
     {
-        if (CheckFileExists(devicePath)) return;
+        if (CheckMetaExists(devicePath)) return;
         MetaData metaData = new()
         {
             LastBackup = null
@@ -19,19 +19,21 @@ public class BackupService(ISettingsManager settingsManager) : IBackupService
         var jsonString = JsonSerializer.Serialize(metaData);
         File.WriteAllText(FullPath(devicePath), jsonString);
     }
-    
-    public void CreateBackup()
+
+    public void AddBackupJob()
     {
         
     }
-
-    public bool CheckDevice(string devicePath)
+    
+    public void TriggerBackups(string devicePath)
     {
-        return CheckFileExists(devicePath);
+        if (!CheckMetaExists(devicePath)) return;
+        File.WriteAllText(devicePath + "test.txt", "Dies ist ein Test String");
     }
     
-    //helpers
-    private static bool CheckFileExists(string devicePath)
+    // helpers
+    
+    private static bool CheckMetaExists(string devicePath)
     {
         return File.Exists(FullPath(devicePath));
     }

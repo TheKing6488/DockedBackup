@@ -1,29 +1,24 @@
-﻿// Erstelle und konfiguriere die ServiceCollection
-
+﻿using CommandLine;
+using KopiaBackup.Console.Commands;
+using KopiaBackup.Console.Models.Kopia;
 using KopiaBackup.Lib.DependencyInjection;
+using KopiaBackup.Lib.Interfaces.Helpers;
 using KopiaBackup.Lib.Interfaces.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 
-var services = new ServiceCollection();
-            
-services.AddKopiaBackupServices();
-            
-var serviceProvider = services.BuildServiceProvider();
-            
-var backupService = serviceProvider.GetRequiredService<IBackupService>();
+var service = new ServiceCollection();
 
-var serviceCollection = new ServiceCollection();
-ConfigureServices(serviceCollection);
+service.AddKopiaBackupServices();
+var serviceProvider = service.BuildServiceProvider();
+var rcloneHelper = serviceProvider.GetRequiredService<IRcloneHelper>();
+var kopiaHelper = serviceProvider.GetRequiredService<IKopiaHelper>();
+var folderWatcherService = serviceProvider.GetRequiredService<IFolderWatcherService>();
+folderWatcherService.Start();
 
-// Baue den ServiceProvider
-var serviceProvider = serviceCollection.BuildServiceProvider();
-
-// Hole den Service aus dem Provider und nutze ihn
-var greetingService = serviceProvider.GetService<IGreetingService>();
-
-greetingService.Greet("Welt");
-
-();
-
-Console.WriteLine("Hello, World!");
+Parser.Default.ParseArguments<KopiaRepositoryConnect, CreateFilesystem, MigrateRepository>(args)
+    .MapResult(
+        (KopiaRepositoryConnect repositoryConnect) => KopiaCommands.RunCreateExternalS3Config(kopiaHelper, repositoryConnect),
+        (CreateFilesystem createFilesystem) => KopiaCommands.RunCreateRepository(kopiaHelper, createFilesystem),
+        (MigrateRepository migrateRepository) => KopiaCommands.RunMigrateRepository(kopiaHelper, migrateRepository),
+        _ => 1);

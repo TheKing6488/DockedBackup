@@ -1,8 +1,9 @@
 ﻿using System.Diagnostics;
+using KopiaBackup.Lib.Interfaces.Helpers;
 
 namespace KopiaBackup.Lib.Helpers;
 
-public class RcloneHelper
+public class RcloneHelper : IRcloneHelper
 {
     public static bool IsRcloneInstalled()
     {
@@ -37,6 +38,7 @@ public class RcloneHelper
                 Arguments = "config",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
+                RedirectStandardInput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true
             };
@@ -45,8 +47,7 @@ public class RcloneHelper
             process.StartInfo = processInfo;
             process.EnableRaisingEvents = true;
 
-            // Event-Handler registrieren, um die Ausgabe zu überwachen
-            process.OutputDataReceived += (sender, args) =>
+            process.OutputDataReceived += (_, args) =>
             {
                 if (!string.IsNullOrEmpty(args.Data))
                 {
@@ -54,7 +55,7 @@ public class RcloneHelper
                 }
             };
 
-            process.ErrorDataReceived += (sender, args) =>
+            process.ErrorDataReceived += (_, args) =>
             {
                 if (!string.IsNullOrEmpty(args.Data))
                 {
@@ -62,14 +63,18 @@ public class RcloneHelper
                 }
             };
 
-            // Prozess starten und asynchron die Ausgaben lesen
             process.Start();
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
 
-            // Warten, bis der Prozess beendet ist
-            await process.WaitForExitAsync();
-
+            while (!process.HasExited)
+            {
+                var input = Console.ReadLine();
+                if (input != null)
+                {
+                    await process.StandardInput.WriteLineAsync(input);
+                }
+            }
             Console.WriteLine($"Prozess beendet mit ExitCode: {process.ExitCode}");
         }
         catch (Exception ex)

@@ -3,7 +3,7 @@
 // using KopiaBackup.Lib.Repositories;
 // using Shouldly;
 //
-// namespace KopiaBackup.Tests.RepositoriesTests;
+// namespace KopiaBackup.Lib.Tests.RepositoriesTests;
 //
 // public class SettingsManagerTests : IDisposable
 // {
