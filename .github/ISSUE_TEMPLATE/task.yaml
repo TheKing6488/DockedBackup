@@ -1,8 +1,8 @@
 name: Task
 description: Create a Task
 title: "[TASK]"
+projects: ["Kopia-Backup/19"] 
 labels: [task]
-projects: ["Kopia Backup"] 
 body:
   - type: textarea
     id: what-happened

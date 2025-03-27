@@ -2,7 +2,7 @@ name: Bug Report
 description: Melde einen Fehler im Projekt
 title: "[BUG]"
 labels: [bug]
-projects: ["Kopia Backup"] 
+projects: ["TheKing6488/projects/19"] 
 body:
   - type: markdown
     attributes:

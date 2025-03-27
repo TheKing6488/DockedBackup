@@ -1,12 +1,14 @@
 name: Task
 description: Create a backlog
 title: "[BACKLOG]"
-labels: [backlog]
-projects: ["Kopia Backup"] 
+projects: ["TheKing6488/19"] 
+labels: 
+  - backlog
 body:
   - type: textarea
-    id: what-happened
+    id: description
     attributes:
       label: Description
+      placeholder: Enter a description here
     validations:
       required: false
