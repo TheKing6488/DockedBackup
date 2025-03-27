@@ -1,8 +1,9 @@
 name: Task
-description: Create a Task
+description: Create a task
 title: "[TASK]"
-projects: ["Kopia-Backup/19"] 
+projects: ["TheKing6488/19"] 
 labels: [task]
+assignees: ["TheKing6488"]
 body:
   - type: textarea
     id: what-happened

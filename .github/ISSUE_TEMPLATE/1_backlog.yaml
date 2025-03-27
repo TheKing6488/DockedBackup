@@ -1,9 +1,9 @@
-name: Backlog
+name: Backlog Item
 description: Create a backlog
 title: "[BACKLOG]"
-projects: ["TheKing6488/19"] 
-labels: 
-  - backlog
+projects: ["TheKing6488/19"]
+assignees: ["TheKing6488"]
+labels: ["backlog"]
 body:
   - type: textarea
     id: description

@@ -1,8 +1,9 @@
 name: Bug Report
-description: Melde einen Fehler im Projekt
+description: Report an error in the project
 title: "[BUG]"
 labels: [bug]
 projects: ["TheKing6488/projects/19"] 
+assignees: ["TheKing6488"]
 body:
   - type: markdown
     attributes:
