@@ -16,9 +16,11 @@ var kopiaHelper = serviceProvider.GetRequiredService<IKopiaHelper>();
 var folderWatcherService = serviceProvider.GetRequiredService<IFolderWatcherService>();
 folderWatcherService.Start();
 
-Parser.Default.ParseArguments<KopiaRepositoryConnect, CreateFilesystem, MigrateRepository>(args)
-    .MapResult(
-        (KopiaRepositoryConnect repositoryConnect) => KopiaCommands.RunCreateExternalS3Config(kopiaHelper, repositoryConnect),
-        (CreateFilesystem createFilesystem) => KopiaCommands.RunCreateRepository(kopiaHelper, createFilesystem),
-        (MigrateRepository migrateRepository) => KopiaCommands.RunMigrateRepository(kopiaHelper, migrateRepository),
-        _ => 1);
+
+Console.ReadLine();
+// Parser.Default.ParseArguments<KopiaRepositoryConnect, CreateFilesystem, MigrateRepository>(args)
+//     .MapResult(
+//         (KopiaRepositoryConnect repositoryConnect) => KopiaCommands.RunCreateExternalS3Config(kopiaHelper, repositoryConnect),
+//         (CreateFilesystem createFilesystem) => KopiaCommands.RunCreateRepository(kopiaHelper, createFilesystem),
+//         (MigrateRepository migrateRepository) => KopiaCommands.RunMigrateRepository(kopiaHelper, migrateRepository),
+//         _ => 1);

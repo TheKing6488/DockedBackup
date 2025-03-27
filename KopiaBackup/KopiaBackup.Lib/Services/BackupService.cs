@@ -27,8 +27,21 @@ public class BackupService(ISettingsManager settingsManager) : IBackupService
     
     public void TriggerBackups(string devicePath)
     {
-        if (!CheckMetaExists(devicePath)) return;
-        File.WriteAllText(devicePath + "test.txt", "Dies ist ein Test String");
+        // if (!CheckMetaExists(devicePath)) return;
+        try
+        {
+            string testFilePath = Path.Combine(devicePath, "test.txt");
+            var dirInfo = new DirectoryInfo(devicePath);
+            Console.WriteLine($"Owner: {dirInfo.GetAccessControl().GetOwner(typeof(System.Security.Principal.NTAccount))}");
+
+            
+            File.WriteAllText(testFilePath, "Dies ist ein Test String");
+            Console.WriteLine("Datei geschrieben: " + testFilePath);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Fehler beim Schreiben: " + ex.Message);
+        }
     }
     
     // helpers
