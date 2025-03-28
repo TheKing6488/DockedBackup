@@ -1,6 +1,6 @@
 ﻿using KopiaBackup.Lib.Helpers;
 using KopiaBackup.Lib.Interfaces.Helpers;
-using KopiaBackup.lib.Interfaces.Repositories;
+using KopiaBackup.Lib.Interfaces.Repositories;
 using KopiaBackup.Lib.Interfaces.Services;
 using KopiaBackup.Lib.Repositories;
 using KopiaBackup.Lib.Services;
@@ -10,7 +10,7 @@ namespace KopiaBackup.Lib.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddKopiaBackupServices(this IServiceCollection services)
+    public static void AddKopiaBackupServices(this IServiceCollection services)
     {
         
         var localizer = new ResourceLocalizerHelper();
@@ -28,6 +28,5 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ISettingsManager, SettingsManager>();
         services.AddSingleton<IBackupService, BackupService>();
         services.AddSingleton<IFolderWatcherService>(provider => new FolderWatcherService($"/run/media/{Environment.UserName}", provider.GetRequiredService<IBackupService>()));
-        return services;
     }
 }

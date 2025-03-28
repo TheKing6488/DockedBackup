@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
-        <RootNamespace>KopiaBackup.Tests</RootNamespace>
+        <RootNamespace>KopiaBackup.Lib.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

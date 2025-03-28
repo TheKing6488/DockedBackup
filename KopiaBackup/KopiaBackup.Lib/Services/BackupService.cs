@@ -1,14 +1,17 @@
 ﻿using System.Text.Json;
-using KopiaBackup.lib.Interfaces.Repositories;
+using KopiaBackup.Lib.Interfaces.Helpers;
+using KopiaBackup.Lib.Interfaces.Repositories;
 using KopiaBackup.Lib.Interfaces.Services;
 using KopiaBackup.Lib.Models;
+using KopiaBackup.Lib.Models.Backups;
+
 
 namespace KopiaBackup.Lib.Services;
 
-public class BackupService(ISettingsManager settingsManager) : IBackupService
+public class BackupService(ISettingsManager settingsManager, IKopiaHelper kopiaHelper) : IBackupService
 {
     private const string MetaDataFileName = "metadata.json";
-    
+
     public void InitializeDevice(string devicePath)
     {
         if (CheckMetaExists(devicePath)) return;
@@ -20,32 +23,30 @@ public class BackupService(ISettingsManager settingsManager) : IBackupService
         File.WriteAllText(FullPath(devicePath), jsonString);
     }
 
-    public void AddBackupJob()
+    public void AddBackupTask(BackupTask backupTask)
     {
-        
+        var settings =  settingsManager.GetUserSettings();
+         settings.BackupTasks.Add(backupTask);
+         settingsManager.SaveUserSettings(settings);
     }
-    
-    public void TriggerBackups(string devicePath)
-    {
-        // if (!CheckMetaExists(devicePath)) return;
-        try
-        {
-            string testFilePath = Path.Combine(devicePath, "test.txt");
-            var dirInfo = new DirectoryInfo(devicePath);
-            Console.WriteLine($"Owner: {dirInfo.GetAccessControl().GetOwner(typeof(System.Security.Principal.NTAccount))}");
 
-            
-            File.WriteAllText(testFilePath, "Dies ist ein Test String");
-            Console.WriteLine("Datei geschrieben: " + testFilePath);
-        }
-        catch (Exception ex)
+    public async Task TriggerBackupsAsync(string devicePath)
+    {
+        if (!CheckMetaExists(devicePath)) return;
+        var settings =  settingsManager.GetUserSettings();
+        foreach (var
+                     migrateCredentialsStore in settings.BackupTasks)
         {
-            Console.WriteLine("Fehler beim Schreiben: " + ex.Message);
+            // var migrateCredentials = new MigrateCredentials(
+            //     migrateCredentialsStore.SourceConfig,
+            //     migrateCredentialsStore.ConfigFile,
+            //     migrateCredentialsStore.Password
+            // );
+            // kopiaHelper.MigrateRepository(migrateCredentials);
         }
     }
-    
+
     // helpers
-    
     private static bool CheckMetaExists(string devicePath)
     {
         return File.Exists(FullPath(devicePath));

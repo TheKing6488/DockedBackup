@@ -1,10 +1,9 @@
-﻿namespace KopiaBackup.Lib.Models;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using KopiaBackup.Lib.Models.Backups;
+using KopiaBackup.Lib.Models.Kopia;
 
-public class UserSettings 
-{
-    public DayOfWeek Day { get; set; }
-    public List<string> BackupDeviceNames {
-        get;
-        set;
-    }
-}
+namespace KopiaBackup.Lib.Models;
+
+public record UserSettings(IList<BackupTask> BackupTasks, IList<MigrateCredentialsStore> MigrateCredentialsStore);
+

@@ -26,10 +26,20 @@ public static class KopiaCommands
                 System.Console.WriteLine(output);
                 break;
         }
-
         return 0;
     }
-
+    public static int RunAddKopiaMigration(IKopiaHelper kopiaHelper, MigrateRepository migrateRepository)
+    {
+        var migrateCredentialsStore = new MigrateCredentialsStore
+        {
+            Name = migrateRepository.Name,
+            SourceConfig = migrateRepository.SourceConfig,
+            ConfigFile = migrateRepository.ConfigFile,
+            Password = migrateRepository.Passwort
+        };
+        kopiaHelper.AddKopiaMigration(migrateCredentialsStore);
+        return 0;
+    }
     public static int RunCreateRepository(IKopiaHelper kopiaHelper, CreateFilesystem createFilesystem)
     {
         var filesystemCredentials = new FilesystemCredentials(
@@ -47,15 +57,39 @@ public static class KopiaCommands
 
         return 0;
     }
-
     public static int RunMigrateRepository(IKopiaHelper kopiaHelper, MigrateRepository migrateRepository)
     {
-        var migrateCredentials = new MigrateCredentials(
-            migrateRepository.SourceConfig,
-            migrateRepository.Passwort
-        );
+        var migrateCredentials = new MigrateCredentialsStore
+        {
+            Name = migrateRepository.Name,
+            SourceConfig = migrateRepository.SourceConfig,
+            ConfigFile = migrateRepository.ConfigFile,
+            Password = migrateRepository.Passwort
+        };
+
         var output = kopiaHelper.MigrateRepository(migrateCredentials);
         System.Console.WriteLine(output);
+        return 0;
+    }
+    public static int RunGetAllKopiaMigrations(IKopiaHelper kopiaHelper)
+    {
+        var output = kopiaHelper.GetAllKopiaMigrateConfigs();
+
+        const int idWidth = 36;
+        const int nameWidth = 20;
+        const int sourceConfigWidth = 20;
+        const int configFileWidth = 20;
+        const int passwordWidth = 20;
+
+        var header = $"{ "ID",-idWidth} | {"Name",-nameWidth} | {"Source Config",-sourceConfigWidth} | {"Config File",-configFileWidth} | {"Password",-passwordWidth}";
+        System.Console.WriteLine(header);
+        System.Console.WriteLine(new string('-', header.Length));
+
+        foreach (var migrateConfig in output)
+        {
+            var line = $"{migrateConfig.Id,-idWidth} | {migrateConfig.Name,-nameWidth} | {migrateConfig.SourceConfig,-sourceConfigWidth} | {migrateConfig.ConfigFile,-configFileWidth} | {migrateConfig.Password,-passwordWidth}";
+            System.Console.WriteLine(line);
+        }
         return 0;
     }
 }

@@ -1,8 +1,10 @@
-﻿namespace KopiaBackup.Lib.Interfaces.Services;
+﻿using KopiaBackup.Lib.Models.Backups;
+
+namespace KopiaBackup.Lib.Interfaces.Services;
 
 public interface IBackupService
 {
-    public void InitializeDevice(string devicePath);
-    public void AddBackupJob();
-    public void TriggerBackups(string devicePath);
+    void InitializeDevice(string devicePath);
+    public void AddBackupTask(BackupTask backupTask);
+    Task TriggerBackupsAsync(string devicePath);
 }

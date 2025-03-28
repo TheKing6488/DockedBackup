@@ -21,7 +21,7 @@ public class FolderWatcherService(string folderPath, IBackupService backupServic
         // watcher.Deleted += OnChanged;
         
         watcher.Created += OnUsbMounted;
-        watcher.Deleted += OnUsbRemoved;
+        // watcher.Deleted += OnUsbRemoved;
         
         // watcher.Renamed += OnRenamed;
         watcher.EnableRaisingEvents = true;
@@ -37,15 +37,14 @@ public class FolderWatcherService(string folderPath, IBackupService backupServic
     
     private void OnUsbMounted(object sender, FileSystemEventArgs e)
     {
-        Console.WriteLine($"USB-Stick eingesteckt: {e.FullPath}");
-        backupService.TriggerBackups(e.FullPath);
+        backupService.TriggerBackupsAsync(e.FullPath);
     }
 
-    private void OnUsbRemoved(object sender, FileSystemEventArgs e)
-    {
-        Console.WriteLine($"USB-Stick entfernt: {e.FullPath}");
-        // Optional: Aktionen beim Entfernen
-    }
+    // private void OnUsbRemoved(object sender, FileSystemEventArgs e)
+    // {
+    //     Console.WriteLine($"USB-Stick entfernt: {e.FullPath}");
+    //     // Optional: Aktionen beim Entfernen
+    // }
 
     // private void OnRenamed(object sender, RenamedEventArgs e)
     // {

@@ -1,10 +1,9 @@
 ﻿using KopiaBackup.Lib.Models;
 
-namespace KopiaBackup.lib.Interfaces.Repositories;
+namespace KopiaBackup.Lib.Interfaces.Repositories;
 
 public interface ISettingsManager
 {
-    public UserSettings UserSettings { get; }
-    Task LoadSettingsFromJsonAsync();
-    Task SaveSettingsToJsonAsync(UserSettings userSettings);
+    UserSettings GetUserSettings();
+    void SaveUserSettings(UserSettings userSettings);
 }
