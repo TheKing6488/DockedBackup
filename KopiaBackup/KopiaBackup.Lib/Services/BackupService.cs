@@ -1,9 +1,11 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 using KopiaBackup.Lib.Interfaces.Helpers;
 using KopiaBackup.Lib.Interfaces.Repositories;
 using KopiaBackup.Lib.Interfaces.Services;
 using KopiaBackup.Lib.Models;
 using KopiaBackup.Lib.Models.Backups;
+using KopiaBackup.Lib.Models.Kopia;
 
 
 namespace KopiaBackup.Lib.Services;
@@ -25,24 +27,28 @@ public class BackupService(ISettingsManager settingsManager, IKopiaHelper kopiaH
 
     public void AddBackupTask(BackupTask backupTask)
     {
-        var settings =  settingsManager.GetUserSettings();
-         settings.BackupTasks.Add(backupTask);
-         settingsManager.SaveUserSettings(settings);
+        var settings = settingsManager.GetUserSettings();
+        settings.BackupTasks.Add(backupTask);
+        settingsManager.SaveUserSettings(settings);
     }
 
-    public async Task TriggerBackupsAsync(string devicePath)
+    public void TriggerBackups(string devicePath)
     {
-        if (!CheckMetaExists(devicePath)) return;
-        var settings =  settingsManager.GetUserSettings();
-        foreach (var
-                     migrateCredentialsStore in settings.BackupTasks)
+        if (!CheckMetaExists(devicePath))
+            return;
+        var settings = settingsManager.GetUserSettings();
+        var validBackupTasks = settings.BackupTasks
+            .Select(task => new
+            {
+                Task = task,
+                Credentials = settings.MigrateCredentialsStore.SingleOrDefault(mcs => mcs.Id == task.AccessDataId)
+            })
+            .Where(x => x.Credentials != null);
+        
+        foreach (var item in validBackupTasks)
         {
-            // var migrateCredentials = new MigrateCredentials(
-            //     migrateCredentialsStore.SourceConfig,
-            //     migrateCredentialsStore.ConfigFile,
-            //     migrateCredentialsStore.Password
-            // );
-            // kopiaHelper.MigrateRepository(migrateCredentials);
+            if (item.Credentials is null) continue;
+            kopiaHelper.MigrateRepository(item.Credentials);
         }
     }
 

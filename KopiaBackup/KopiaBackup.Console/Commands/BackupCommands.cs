@@ -3,7 +3,9 @@ using KopiaBackup.Lib.Interfaces.Services;
 
 namespace KopiaBackup.Console.Commands;
 
-public class BackupCommands
+// TODO change to a instance for better handling and interface support
+
+public static class BackupCommands
 {
     public static int RunAddBackupTask(IBackupService backupService, BackupTask backupTask)
     {

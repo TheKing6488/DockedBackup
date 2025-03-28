@@ -27,6 +27,5 @@ public static class ServiceCollectionExtensions
         //Services
         services.AddSingleton<ISettingsManager, SettingsManager>();
         services.AddSingleton<IBackupService, BackupService>();
-        services.AddSingleton<IFolderWatcherService>(provider => new FolderWatcherService($"/run/media/{Environment.UserName}", provider.GetRequiredService<IBackupService>()));
     }
 }

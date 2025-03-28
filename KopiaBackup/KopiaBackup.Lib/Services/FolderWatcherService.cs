@@ -1,53 +1,26 @@
 ﻿using KopiaBackup.Lib.Interfaces.Services;
+using Microsoft.Extensions.Hosting;
 
 namespace KopiaBackup.Lib.Services;
 
-public class FolderWatcherService(string folderPath, IBackupService backupService) : IFolderWatcherService
+public class FolderWatcherService(string watchPath, IBackupService backupService) : IHostedService
 {
-    public void Start()
+    private FileSystemWatcher? _watcher;
+    public Task StartAsync(CancellationToken cancellationToken)
     {
-        var watcher = new FileSystemWatcher(folderPath)
-        {
-            NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.Attributes | NotifyFilters.LastWrite ,
-            Filter = "*",
-            IncludeSubdirectories = false
-        };
-        
-        Console.WriteLine("Start watching");
-
-
-        // watcher.Changed += OnChanged;
-        // watcher.Created += OnChanged;
-        // watcher.Deleted += OnChanged;
-        
-        watcher.Created += OnUsbMounted;
-        // watcher.Deleted += OnUsbRemoved;
-        
-        // watcher.Renamed += OnRenamed;
-        watcher.EnableRaisingEvents = true;
+        _watcher = new FileSystemWatcher(watchPath);
+        _watcher.Created += OnChanged;
+        _watcher.EnableRaisingEvents = true;
+        return Task.CompletedTask;
     }
 
-    // private void OnChanged(object sender, FileSystemEventArgs e)
-    // {
-    //     Console.WriteLine("File watcher: " + e.FullPath);
-    //     backupService.TriggerBackups(e.FullPath);
-    // }
-    
-    
-    
-    private void OnUsbMounted(object sender, FileSystemEventArgs e)
+    private void OnChanged(object sender, FileSystemEventArgs e)
     {
-        backupService.TriggerBackupsAsync(e.FullPath);
+         backupService.TriggerBackups(e.FullPath);
     }
-
-    // private void OnUsbRemoved(object sender, FileSystemEventArgs e)
-    // {
-    //     Console.WriteLine($"USB-Stick entfernt: {e.FullPath}");
-    //     // Optional: Aktionen beim Entfernen
-    // }
-
-    // private void OnRenamed(object sender, RenamedEventArgs e)
-    // {
-    //     // Handle file renames
-    // }
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _watcher?.Dispose();
+        return Task.CompletedTask;
+    }
 }

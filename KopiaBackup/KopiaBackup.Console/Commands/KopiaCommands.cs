@@ -5,7 +5,7 @@ using KopiaBackup.Lib.Interfaces.Helpers;
 using KopiaBackup.Lib.Models.Kopia;
 
 namespace KopiaBackup.Console.Commands;
-
+// TODO change to a instance for better handling and interface support
 public static class KopiaCommands
 {
     public static int RunCreateExternalS3Config(IKopiaHelper kopiaHelper, KopiaRepositoryConnect kopiaRepositoryConnect)
