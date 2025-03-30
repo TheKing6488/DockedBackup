@@ -10,6 +10,7 @@ public class FolderWatcherService(string watchPath, IBackupService backupService
     {
         _watcher = new FileSystemWatcher(watchPath);
         _watcher.Created += OnChanged;
+        _watcher.Deleted += OnDeleted;
         _watcher.EnableRaisingEvents = true;
         return Task.CompletedTask;
     }
@@ -18,6 +19,12 @@ public class FolderWatcherService(string watchPath, IBackupService backupService
     {
          backupService.TriggerBackups(e.FullPath);
     }
+    
+    private void OnDeleted(object sender, FileSystemEventArgs e)
+    {
+        backupService.TriggerBackups(e.FullPath);
+    }
+    
     public Task StopAsync(CancellationToken cancellationToken)
     {
         _watcher?.Dispose();
