@@ -13,14 +13,12 @@ public static class ServiceCollectionExtensions
     public static void AddKopiaBackupServices(this IServiceCollection services)
     {
         
-        var localizer = new ResourceLocalizerHelper();
-        if (!RcloneHelper.IsRcloneInstalled())
-        {
-            throw new InvalidOperationException(localizer.GetString("RcloneNotFound"));
-        }
+        // if (!RcloneHelper.IsRcloneInstalled())
+        // {
+        //     throw new InvalidOperationException(localizer.GetString("RcloneNotFound"));
+        // }
         
         //Helpers
-        services.AddSingleton<IResourceLocalizerHelper, ResourceLocalizerHelper>();
         services.AddSingleton<IKopiaHelper, KopiaHelper>();
         services.AddSingleton<IRcloneHelper, RcloneHelper>();
 
