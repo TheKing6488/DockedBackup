@@ -1,0 +1,37 @@
+# Maintainer: Your Name <youremail@domain.com>
+pkgname=kopiabackup
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="This is a simple backup tool for offline backups."
+arch=("x86_64")
+url="https://github.com/TheKing6488/Kopia-Backup"
+license=('MIT')
+depends=('rclone' 'kopia')
+provides=()
+conflicts=()
+source=($pkgname-$pkgver.tar.gz
+        $pkgname-$pkgver.patch)
+sha256sums=('SKIP')  # besser: korrekten Hash setzen
+
+prepare() {
+	cd "$srcdir/$pkgname-$pkgver"
+	patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
+}
+
+build() {
+	cd "$srcdir/$pkgname-$pkgver"
+	./configure --prefix=/usr
+	make
+}
+
+check() {
+	cd "$srcdir/$pkgname-$pkgver"
+	make -k check
+}
+
+package() {
+	cd "$srcdir/$pkgname-$pkgver"
+	make DESTDIR="$pkgdir/" install
+}
+
+

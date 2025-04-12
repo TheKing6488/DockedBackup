@@ -34,6 +34,8 @@ Parser.Default.ParseArguments<KopiaRepositoryConnect, CreateFilesystem, MigrateR
         (BackupTask backupTask) => BackupCommands.RunAddBackupTask(backupService, backupTask),
         (GetKopiaCredentialsOptions _) => KopiaCommands.RunGetAllKopiaMigrations(kopiaHelper),
         _ => 1);
+
+
+
         
-        
-await host.RunAsync();
+// await host.RunAsync();
