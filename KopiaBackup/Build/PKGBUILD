@@ -1,5 +1,4 @@
-# Maintainer: Your Name <youremail@domain.com>
-pkgname=kopiabackup
+pkgname=DockedBackup
 pkgver=1.0.0
 pkgrel=1
 pkgdesc="This is a simple backup tool for offline backups."
@@ -11,7 +10,7 @@ provides=()
 conflicts=()
 source=($pkgname-$pkgver.tar.gz
         $pkgname-$pkgver.patch)
-sha256sums=('SKIP')  # besser: korrekten Hash setzen
+sha256sums=('SKIP')
 
 prepare() {
 	cd "$srcdir/$pkgname-$pkgver"
@@ -33,5 +32,3 @@ package() {
 	cd "$srcdir/$pkgname-$pkgver"
 	make DESTDIR="$pkgdir/" install
 }
-
-
