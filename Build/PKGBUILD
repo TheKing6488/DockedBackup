@@ -5,7 +5,10 @@ pkgdesc="This is a simple backup tool for offline backups."
 arch=("x86_64")
 url="https://github.com/TheKing6488/Kopia-Backup"
 license=('MIT')
-depends=('rclone' 'kopia')
+optdepends=(
+  'rclone'
+  'kopia'
+)
 provides=()
 conflicts=()
 source=(kopiabackup.tar.gz)
