@@ -2,56 +2,54 @@ name: Build and Release
 
 on:
   push:
-    tags:
-      - 'v*'  # Trigger bei Tags wie v1.0.0
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        runtime: [linux-x64]
-
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '9.0.x'
+
+      - name: Abhängigkeiten wiederherstellen
+        working-directory: KopiaBackup/KopiaBackup.Console
+        run: dotnet restore
 
       - name: Publish AOT
-        run: |
-          dotnet publish -c Release -r ${{ matrix.runtime }} --self-contained true /p:PublishAot=true -o publish/
+        working-directory: KopiaBackup/KopiaBackup.Console
+        run: dotnet publish -c Release -o publish/
 
       - name: Package as tar.gz
-        run: |
-          cd publish
-          tar -czf ../myapp-${{ github.ref_name }}-${{ matrix.runtime }}.tar.gz *
+        working-directory: KopiaBackup/KopiaBackup.Console/publish
+        run:
+          tar -czf $GITHUB_WORKSPACE/dockedbackup.tar.gz .
 
       - name: Upload Release Artifact
-        uses: softprops/action-gh-release@v2
+        uses: actions/upload-artifact@v4
         with:
-          files: |
-            myapp-*.tar.gz
+          name: publish-folder
+          path: dockedbackup.tar.gz
 
-  arch-pkg:
-    runs-on: ubuntu-latest
-    needs: build
-    container: archlinux:latest
+  # arch-pkg:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   container: archlinux:latest
 
-    steps:
-      - name: Install build deps
-        run: |
-          pacman -Syu --noconfirm base-devel git
+  #   steps:
+  #     - name: Install build deps
+  #       run: |
+  #         pacman -Syu --noconfirm base-devel git
 
-      - name: Checkout Repo
-        uses: actions/checkout@v3
+  #     - name: Checkout Repo
+  #       uses: actions/checkout@v3
 
-      - name: Build PKGBUILD
-        run: |
-          cd archpkg
-          makepkg -fsri --noconfirm
+  #     - name: Build PKGBUILD
+  #       run: |
+  #         cd archpkg
+  #         makepkg -fsri --noconfirm
