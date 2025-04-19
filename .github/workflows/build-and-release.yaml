@@ -43,16 +43,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup build‑Umgebung
         run: pacman -Syu --noconfirm --needed base-devel
+
+      - name: Create builder user
+        run: |
+          useradd -m builder
+          chown -R builder:builder $GITHUB_WORKSPACE
+
       - name: Download Source‑Tarball
         uses: actions/download-artifact@v4
         with:
           name: dockedbackup.tar.gz
           path: Build
+
       - name: Bau das Arch‑Paket
         working-directory: Build
-        run: makepkg -f --skippgpcheck
+        run: su builder -c "makepkg -f --skippgpcheck"
+
       - name: Upload Arch‑Paket
         uses: actions/upload-artifact@v4
         with:
