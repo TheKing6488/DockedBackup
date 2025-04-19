@@ -33,22 +33,28 @@ jobs:
       - name: Upload Release Artifact
         uses: actions/upload-artifact@v4
         with:
+          name: dockedbackup.tar.gz
           path: dockedbackup.tar.gz
 
-  # arch-pkg:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   container: archlinux:latest
-
-  #   steps:
-  #     - name: Install build deps
-  #       run: |
-  #         pacman -Syu --noconfirm base-devel git
-
-  #     - name: Checkout Repo
-  #       uses: actions/checkout@v3
-
-  #     - name: Build PKGBUILD
-  #       run: |
-  #         cd archpkg
-  #         makepkg -fsri --noconfirm
+  arch-pkg:
+    runs-on: ubuntu-latest
+    needs: build
+    container: archlinux:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup build‑Umgebung
+        run: pacman -Syu --noconfirm --needed base-devel
+      - name: Download Source‑Tarball
+        uses: actions/download-artifact@v4
+        with:
+          name: dockedbackup.tar.gz
+          path: Build
+      - name: Bau das Arch‑Paket
+        working-directory: Build
+        run: makepkg -f --skippgpcheck
+      - name: Upload Arch‑Paket
+        uses: actions/upload-artifact@v4
+        with:
+          name: arch-pkg
+          path: Build/*.pkg.tar.zst
