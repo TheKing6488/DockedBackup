@@ -11,12 +11,12 @@ optdepends=(
 )
 provides=()
 conflicts=()
-source=(kopiabackup.tar.gz)
+source=(dockedbackup.tar.gz)
 sha256sums=('SKIP')
 
 package() {
   cd "$srcdir"
-  tar -xzf "kopiabackup.tar.gz"
+  tar -xzf "dockedbackup.tar.gz"
   install -Dm755 "dockedbackup/KopiaBackup.Console" "$pkgdir/usr/bin/dockedbackup"
 #   install -Dm644 "$srcdir/mytool-backup.service" "$pkgdir/usr/lib/systemd/system/mytool-backup.service"
 }
