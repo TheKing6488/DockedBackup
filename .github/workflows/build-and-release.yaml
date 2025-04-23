@@ -137,7 +137,7 @@ jobs:
       - name: build deb package
         working-directory: packaging/
         run: |
-          fakeroot debuild -us -uc
+          fakeroot debuild -us -uc -b
          
       - name: Upload deb package
         uses: actions/upload-artifact@v4
