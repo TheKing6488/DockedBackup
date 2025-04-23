@@ -47,12 +47,18 @@ jobs:
           path: dockedbackup-${{ matrix.pkgarch }}.tar.gz
 
   arch-pkg:
-    runs-on: ubuntu-latest
-    needs: prepare
-    container: archlinux:latest
+    runs-on: ${{ matrix.build-on }}
     strategy:
       matrix:
-        pkgarch: [ x86_64, aarch64 ]
+        include:
+          - pkgarch: x86_64
+            container: x86archlinux:latest_64
+            build-on: ubuntu-latest
+          - pkgarch: aarch64 
+            container: menci/archlinuxarm:latest
+            build-on: ubuntu-24.04-arm
+    needs: prepare
+    container: ${{matrix.container}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -73,7 +79,7 @@ jobs:
 
       - name: build arch package
         working-directory: Build
-        run: su builder -c "makepkg --pkgarch ${{matrix.pkgarch}} -f --skippgpcheck"
+        run: su builder -c "makepkg -f --skippgpcheck"
 
       - name: Upload arch package
         uses: actions/upload-artifact@v4
