@@ -75,12 +75,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup build environment
-        run: pacman -Syu --noconfirm --needed base-devel
-
-      - name: Create builder user
-        run: |
-          useradd -m builder
-          chown -R builder:builder $GITHUB_WORKSPACE
+        run: pacman -Syu --noconfirm --needed base-devel fakeroot
 
       - name: Download Source‑Tarball
         uses: actions/download-artifact@v4
@@ -92,7 +87,7 @@ jobs:
         working-directory: packaging/pkg
         run: |
           mv dockedbackup-${{matrix.rid}}.tar.gz dockedbackup.tar.gz
-          su builder -c "makepkg -f --skippgpcheck"
+          fakeroot makepkg -f --skippgpcheck
 
       - name: Upload pkg package
         uses: actions/upload-artifact@v4
@@ -107,7 +102,7 @@ jobs:
       matrix:
         include:
           - rid: linux-x64
-            build-on: archlinux:latest
+            build-on: ubuntu-latest
           - rid: linux-arm64
             build-on: ubuntu-24.04-arm
     env:
@@ -119,8 +114,7 @@ jobs:
       - name: Setup build environment
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential dh-make devscripts debhelper fakeroot
-
+          sudo apt-get install -y build-essential dh-make devscripts debhelper
 
       - name: Download Source‑Tarball
         uses: actions/download-artifact@v4
@@ -134,7 +128,7 @@ jobs:
           mv dockedbackup-${{matrix.rid}}.tar.gz dockedbackup.tar.gz
           mv dockedbackup.install.sh dockedbackup.postinst
           mv dockedbackup.remove.sh dockedbackup.prerm
-          fakeroot debuild -us -uc
+          debuild -us -uc
          
       - name: Upload deb package
         uses: actions/upload-artifact@v4
