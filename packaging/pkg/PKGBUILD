@@ -13,18 +13,17 @@ provides=()
 conflicts=()
 source=(dockedbackup.tar.gz)
 sha256sums=('SKIP')
-install=dockedbackup_install.sh
+install=install.sh
 
 prepare() {
   tar -xzf "dockedbackup.tar.gz"
 }
 
 package() {
-
   # Helper‑Script
-  install -Dm755 dockedbackup.sh "$pkgdir/usr/libexec/dockedbackup/dockedbackup.sh"
+  install -Dm755 dockedbackup.sh "$pkgdir/usr/lib/dockedbackup/dockedbackup.sh"
   # AOT-Binary
-  install -Dm755 "KopiaBackup.Console" "$pkgdir/usr/bin/dockedbackup"
+  install -Dm755 "DockedBackup.Console" "$pkgdir/usr/bin/dockedbackup"
   # systemd‑Unit
   install -Dm644 "dockedbackup@.service" "$pkgdir/usr/lib/systemd/system/dockedbackup@.service"
 }

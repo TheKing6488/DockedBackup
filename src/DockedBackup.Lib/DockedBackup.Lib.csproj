@@ -4,9 +4,8 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AssemblyName>KopiaBackup.Lib</AssemblyName>
-        <RootNamespace>KopiaBackup.Lib</RootNamespace>
         <IsAotCompatible>true</IsAotCompatible>
+        <PackageId>DockedBackup.Lib</PackageId>
     </PropertyGroup>
 
     <ItemGroup>

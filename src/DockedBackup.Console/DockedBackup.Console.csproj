@@ -10,10 +10,12 @@
         <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
         <InvariantGlobalization>true</InvariantGlobalization>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <AssemblyName>DockedBackup.Console</AssemblyName>
+        <RootNamespace>DockedBackup.Console</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\KopiaBackup.Lib\KopiaBackup.Lib.csproj" />
+      <ProjectReference Include="..\DockedBackup.Lib\DockedBackup.Lib.csproj" />
     </ItemGroup>
 
     <ItemGroup>

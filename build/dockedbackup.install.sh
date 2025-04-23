@@ -1,5 +1,4 @@
 #!/bin/bash
-post_install() {
   if ! id backupuser &>/dev/null; then
     useradd -r -s /usr/bin/nologin -d /nonexistent backupuser
   fi
@@ -18,10 +17,3 @@ To unregister a device, run:
   sudo dockedbackup unregister <device>
 
 EOF
-}
-
-
-  pre_remove() {
-  systemctl disable dockedbackup@*.service 2>/dev/null || :
-  systemctl daemon-reload
-}

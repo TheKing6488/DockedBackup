@@ -1,0 +1,6 @@
+# Helper‑Script
+dockedbackup.sh usr/libexec/dockedbackup/dockedbackup.sh
+# AOT-Binary
+DockedBackup.Console usr/bin/dockedbackup
+# systemd‑Unit
+dockedbackup@.service usr/lib/systemd/system/dockedbackup@.service

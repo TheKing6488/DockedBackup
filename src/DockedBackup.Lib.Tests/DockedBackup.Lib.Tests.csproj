@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\KopiaBackup.Console\KopiaBackup.Console.csproj" />
+      <ProjectReference Include="..\DockedBackup.Lib\DockedBackup.Lib.csproj" />
     </ItemGroup>
 
 </Project>

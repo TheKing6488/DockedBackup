@@ -5,7 +5,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
-        <RootNamespace>KopiaBackup.Lib.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -28,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\KopiaBackup.Lib\KopiaBackup.Lib.csproj" />
+      <ProjectReference Include="..\DockedBackup.Console\DockedBackup.Console.csproj" />
     </ItemGroup>
 
 </Project>

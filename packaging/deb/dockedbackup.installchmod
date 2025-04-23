@@ -1,0 +1,3 @@
+usr/lib/dockedbackup/dockedbackup.sh 0755
+usr/bin/dockedbackup 0755
+usr/lib/systemd/system/dockedbackup@.service 0644

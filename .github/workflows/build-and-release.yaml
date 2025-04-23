@@ -2,19 +2,35 @@ name: Build and Release
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
+  get_version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+      hasNextVersion: ${{ steps.get_version.outputs.hasNextVersion }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Get Next Version
+        id: get_version
+        uses: thenativeweb/get-next-version@main
+
   prepare:
     runs-on: ${{ matrix.build-on}}
     strategy:
       matrix:
         include:
-        - rid:     linux-x64
-          build-on: ubuntu-latest
-        - rid:     linux-arm64
-          build-on: ubuntu-24.04-arm
+          - rid: linux-x64
+            build-on: ubuntu-latest
+          - rid: linux-arm64
+            build-on: ubuntu-24.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,20 +38,17 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: "9.0.x"
 
       - name: Publish for ${{ matrix.rid }}
-        working-directory: KopiaBackup/KopiaBackup.Console
+        working-directory: src/DockedBackup.Console
         run: dotnet publish -r ${{ matrix.rid }} -c Release --self-contained -p:PublishAot=true -o publish/
-      
+
       - name: Copy Service & Scripts
-        run: |
-          cp Build/dockedbackup@.service KopiaBackup/KopiaBackup.Console/publish
-          cp Build/dockedbackup.sh KopiaBackup/KopiaBackup.Console/publish
-          cp Build/dockedbackup_install.sh KopiaBackup/KopiaBackup.Console/publish
+        run: cp build/* src/DockedBackup.Console/publish
 
       - name: Pack artifact
-        working-directory: KopiaBackup/KopiaBackup.Console/publish
+        working-directory: src/DockedBackup.Console/publish
         run: tar -czf $GITHUB_WORKSPACE/dockedbackup-${{ matrix.rid }}.tar.gz .
 
       - name: Upload Release Artifact
@@ -44,7 +57,8 @@ jobs:
           name: ${{ matrix.rid }}
           path: dockedbackup-${{ matrix.rid }}.tar.gz
 
-  arch-pkg:
+  pkg:
+    needs: [prepare, get_version]
     runs-on: ${{ matrix.build-on }}
     strategy:
       matrix:
@@ -52,10 +66,9 @@ jobs:
           - rid: linux-x64
             container: archlinux:latest
             build-on: ubuntu-latest
-          - rid: linux-arm64 
+          - rid: linux-arm64
             container: menci/archlinuxarm:latest
             build-on: ubuntu-24.04-arm
-    needs: prepare
     container: ${{matrix.container}}
     steps:
       - name: Checkout
@@ -73,19 +86,63 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ matrix.rid }}
-          path: Build
+          path: packaging/pkg
 
-      - name: build arch package
-        working-directory: Build
+      - name: build pkg package
+        working-directory: packaging/pkg
         run: |
           mv dockedbackup-${{matrix.rid}}.tar.gz dockedbackup.tar.gz
           su builder -c "makepkg -f --skippgpcheck"
 
-      - name: Upload arch package
+      - name: Upload pkg package
         uses: actions/upload-artifact@v4
         with:
-          name: arch-${{ matrix.rid }}
-          path: Build/*.pkg.tar.*      
+          name: pkg-${{ matrix.rid }}
+          path: Build/*.pkg.tar.*
+
+  deb:
+    needs: [prepare, get_version]
+    runs-on: ${{ matrix.build-on }}
+    strategy:
+      matrix:
+        include:
+          - rid: linux-x64
+            build-on: archlinux:latest
+          - rid: linux-arm64
+            build-on: ubuntu-24.04-arm
+    env:
+      VERSION: ${{ needs.get_version.outputs.version }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup build environment
+        run: sudo apt install build-essential dh-make devscripts debhelper
+
+      - name: Create builder user
+        run: |
+          useradd -m builder
+          chown -R builder:builder $GITHUB_WORKSPACE
+
+      - name: Download Source‑Tarball
+        uses: actions/download-artifact@v4
+        with:
+            name: ${{ matrix.rid }}
+            path: packaging/deb
+
+      - name: build deb package
+        working-directory: packaging/deb
+        run: |
+          mv dockedbackup-${{matrix.rid}}.tar.gz dockedbackup.tar.gz
+          mv dockedbackup.install.sh dockedbackup.postinst
+          mv dockedbackup.remove.sh dockedbackup.prerm
+          su builder -c "debuild -us -uc"
+         
+      - name: Upload deb package
+        uses: actions/upload-artifact@v4
+        with:
+          name: deb-${{ matrix.rid }}
+          path: Build/*.pkg.tar.*
 
   # release:
   #   needs: [ arch-pkg ]

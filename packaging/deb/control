@@ -1,0 +1,9 @@
+Package: dockedbackup
+Section: utils
+Priority: optional
+Build-Depends: debhelper (>= 13)
+Architecture: all
+Package: dockedbackup
+Maintainer: TheKing6488 <max@example.com>
+Depends: systemd
+Description: "This is a simple backup tool for offline backups."
