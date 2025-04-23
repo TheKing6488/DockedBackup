@@ -2,7 +2,7 @@ pkgname=DockedBackup
 pkgver=1.0.0
 pkgrel=1
 pkgdesc="This is a simple backup tool for offline backups."
-arch=("x86_64", "aarch64")
+arch=("x86_64" "aarch64")
 url="https://github.com/TheKing6488/Kopia-Backup"
 license=('MIT')
 optdepends=(
@@ -11,12 +11,12 @@ optdepends=(
 )
 provides=()
 conflicts=()
-source=(dockedbackup-${pkgarch}.tar.gz)
+source=(dockedbackup.tar.gz)
 sha256sums=('SKIP')
 install=dockedbackup_install.sh
 
 prepare() {
-  tar -xzf "dockedbackup-${pkgarch}.tar.gz"
+  tar -xzf "dockedbackup.tar.gz"
 }
 
 package() {
