@@ -128,7 +128,7 @@ jobs:
             path: packaging/deb
 
       - name: build deb package
-        working-directory: packaging/deb
+        working-directory: packaging/
         run: |
           tar -xzf dockedbackup-${{matrix.rid}}.tar.gz --strip-components=1
           mv dockedbackup.install.sh dockedbackup.postinst
