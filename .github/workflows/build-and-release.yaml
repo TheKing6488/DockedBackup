@@ -43,7 +43,7 @@ jobs:
       - name: Upload Release Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.rid }}
+          name: linux-${{ matrix.pkgarch }}
           path: dockedbackup-${{ matrix.pkgarch }}.tar.gz
 
   arch-pkg:
@@ -68,7 +68,7 @@ jobs:
       - name: Download Source‑Tarball
         uses: actions/download-artifact@v4
         with:
-          name: ${{ matrix.pkgarch }}
+          name: linux-${{ matrix.pkgarch }}
           path: Build
 
       - name: build arch package
