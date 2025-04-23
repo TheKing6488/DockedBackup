@@ -2,12 +2,16 @@ name: Build and Release
 
 on:
   push:
-    branches:
+    branches: 
       - main
 
 jobs:
-  build:
+  prepare:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rid: [ linux-x64, linux-arm64 ]
+        pkgarch: [ x86_64, aarch64 ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,34 +21,39 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Abhängigkeiten wiederherstellen
+      - name: Publish for ${{ matrix.rid }}
         working-directory: KopiaBackup/KopiaBackup.Console
-        run: dotnet restore
+        run: dotnet publish -r ${{ matrix.rid }} -c Release --self-contained -p:PublishAot=true -o publish/
+      
+      - name: Copy Service & Scripts
+        working-directory: Build
+        run: |
+          cp dockedbackup@.service KopiaBackup/KopiaBackup.Console/publish/
+          cp dockedbackup.sh KopiaBackup/KopiaBackup.Console/publish/
+          cp dockedbackup.install.sh KopiaBackup/KopiaBackup.Console/publish/
 
-      - name: Publish AOT
-        working-directory: KopiaBackup/KopiaBackup.Console
-        run: dotnet publish -c Release -o publish/
-
-      - name: Package as tar.gz
+      - name: Pack artifact
         working-directory: KopiaBackup/KopiaBackup.Console/publish
-        run:
-          tar -czf $GITHUB_WORKSPACE/dockedbackup.tar.gz .
+        run: tar -czf $GITHUB_WORKSPACE/dockedbackup-${{ matrix.pkgarch }}.tar.gz .
 
       - name: Upload Release Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dockedbackup.tar.gz
-          path: dockedbackup.tar.gz
+          name: ${{ matrix.rid }}
+          path: dockedbackup-${{ matrix.pkgarch }}.tar.gz
 
   arch-pkg:
     runs-on: ubuntu-latest
-    needs: build
+    needs: prepare
     container: archlinux:latest
+    strategy:
+      matrix:
+        pkgarch: [ x86_64, aarch64 ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup build‑Umgebung
+      - name: Setup build environment
         run: pacman -Syu --noconfirm --needed base-devel
 
       - name: Create builder user
@@ -55,15 +64,30 @@ jobs:
       - name: Download Source‑Tarball
         uses: actions/download-artifact@v4
         with:
-          name: dockedbackup.tar.gz
+          name: ${{ matrix.pkgarch }}
           path: Build
 
-      - name: Bau das Arch‑Paket
+      - name: build arch package
         working-directory: Build
-        run: su builder -c "makepkg -f --skippgpcheck"
+        run: su builder -c "makepkg --pkgarch ${{matrix.pkgarch}} -f --skippgpcheck"
 
-      - name: Upload Arch‑Paket
+      - name: Upload arch package
         uses: actions/upload-artifact@v4
         with:
-          name: arch-pkg
+          name: arch-${{ matrix.pkgarch }}
           path: Build/*.pkg.tar.zst
+      
+
+  release:
+    needs: [ arch-pkg ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create github release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: |
+            dockedbackup-x86_64.tar.gz
+            dockedbackup-aarch64.tar.gz
+            dockedbackup-x86_64.pkg.tar.zst
+            dockedbackup-aarch64.pkg.tar.zst

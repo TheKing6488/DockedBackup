@@ -13,14 +13,10 @@ public static class ServiceCollectionExtensions
     public static void AddKopiaBackupServices(this IServiceCollection services)
     {
         
-        // if (!RcloneHelper.IsRcloneInstalled())
-        // {
-        //     throw new InvalidOperationException(localizer.GetString("RcloneNotFound"));
-        // }
-        
         //Helpers
         services.AddSingleton<IKopiaHelper, KopiaHelper>();
         services.AddSingleton<IRcloneHelper, RcloneHelper>();
+        services.AddSingleton<ISystemctlHelper, SystemctlHelper>();
 
         //Services
         services.AddSingleton<ISettingsManager, SettingsManager>();

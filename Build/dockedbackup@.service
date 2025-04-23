@@ -1,0 +1,13 @@
+[Unit]
+Description=Docked Backup for device %I
+Requires=dev-%i.device
+After=dev-%i.device
+
+[Service]
+Type=oneshot
+ExecStart=usr/lib/dockedbackup/dockedbackup.sh %i
+Restart=on-failure
+User=dockedbackup
+
+[Install]
+WantedBy=dev-%i.device

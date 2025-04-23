@@ -2,7 +2,7 @@
 
 namespace KopiaBackup.Console.Models.Backups;
 
-[Verb("´job", HelpText = "Establishing a connection to the repository")]
+[Verb("job", HelpText = "Establishing a connection to the repository")]
 public class BackupTask
 {
    [Option('n', "name", HelpText = "Specifies the name used for this operation", Required = true)]
