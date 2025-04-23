@@ -117,12 +117,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup build environment
-        run: sudo apt install build-essential dh-make devscripts debhelper
-
-      - name: Create builder user
         run: |
-          useradd -m builder
-          chown -R builder:builder $GITHUB_WORKSPACE
+          sudo apt-get update
+          sudo apt-get install -y build-essential dh-make devscripts debhelper fakeroot
+
 
       - name: Download Source‑Tarball
         uses: actions/download-artifact@v4
@@ -136,7 +134,7 @@ jobs:
           mv dockedbackup-${{matrix.rid}}.tar.gz dockedbackup.tar.gz
           mv dockedbackup.install.sh dockedbackup.postinst
           mv dockedbackup.remove.sh dockedbackup.prerm
-          su builder -c "debuild -us -uc"
+          fakeroot debuild -us -uc
          
       - name: Upload deb package
         uses: actions/upload-artifact@v4
