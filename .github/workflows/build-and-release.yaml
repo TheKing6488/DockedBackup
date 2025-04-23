@@ -52,7 +52,7 @@ jobs:
       matrix:
         include:
           - pkgarch: x86_64
-            container: x86archlinux:latest_64
+            container: archlinux:latest
             build-on: ubuntu-latest
           - pkgarch: aarch64 
             container: menci/archlinuxarm:latest
