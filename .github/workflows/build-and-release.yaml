@@ -118,9 +118,8 @@ jobs:
 
       - name: Setup build environment
         run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential dh-make devscripts debhelper fakeroot
-
+          sudo apt update
+          sudo apt install -y build-essential dh-make devscripts debhelper fakeroot
 
       - name: Download Source‑Tarball
         uses: actions/download-artifact@v4
