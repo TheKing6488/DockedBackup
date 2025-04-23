@@ -87,16 +87,16 @@ jobs:
           name: arch-${{ matrix.rid }}
           path: Build/*.pkg.tar.*      
 
-  release:
-    needs: [ arch-pkg ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create github release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-          files: |
-            dockedbackup-linux-x64.tar.gz
-            dockedbackup-linux-arm64.tar.gz
-            dockedbackup-linux-x64.pkg.tar.zst
-            dockedbackup-linux-arm64.pkg.tar.zst
+  # release:
+  #   needs: [ arch-pkg ]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Create github release
+  #       uses: softprops/action-gh-release@v1
+  #       with:
+  #         tag_name: ${{ github.ref_name }}
+  #         files: |
+  #           dockedbackup-linux-x64.tar.gz
+  #           dockedbackup-linux-arm64.tar.gz
+  #           dockedbackup-linux-x64.pkg.tar.zst
+  #           dockedbackup-linux-arm64.pkg.tar.zst
