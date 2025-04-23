@@ -13,7 +13,7 @@ provides=()
 conflicts=()
 source=(dockedbackup-${pkgarch}.tar.gz)
 sha256sums=('SKIP')
-install=dockedbackup.install.sh
+install=dockedbackup_install.sh
 
 prepare() {
   tar -xzf "dockedbackup-${pkgarch}.tar.gz"

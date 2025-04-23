@@ -16,7 +16,7 @@ jobs:
           build-on: ubuntu-latest
         - rid:     linux-arm64
           pkgarch: aarch64
-          build-on: ubuntu-latest-arm
+          build-on: ubuntu-24.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,11 +31,10 @@ jobs:
         run: dotnet publish -r ${{ matrix.rid }} -c Release --self-contained -p:PublishAot=true -o publish/
       
       - name: Copy Service & Scripts
-        working-directory: Build
         run: |
-          cp dockedbackup@.service KopiaBackup/KopiaBackup.Console/publish/
-          cp dockedbackup.sh KopiaBackup/KopiaBackup.Console/publish/
-          cp dockedbackup.install.sh KopiaBackup/KopiaBackup.Console/publish/
+          cp Build/dockedbackup@.service KopiaBackup/KopiaBackup.Console/publish
+          cp Build/dockedbackup.sh KopiaBackup/KopiaBackup.Console/publish
+          cp Build/dockedbackup_install.sh KopiaBackup/KopiaBackup.Console/publish
 
       - name: Pack artifact
         working-directory: KopiaBackup/KopiaBackup.Console/publish
