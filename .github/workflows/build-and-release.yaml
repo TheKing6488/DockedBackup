@@ -7,11 +7,16 @@ on:
 
 jobs:
   prepare:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.build-on}}
     strategy:
       matrix:
-        rid: [ linux-x64, linux-arm64 ]
-        pkgarch: [ x86_64, aarch64 ]
+        include:
+        - rid:     linux-x64
+          pkgarch: x86_64
+          build-on: ubuntu-latest
+        - rid:     linux-arm64
+          pkgarch: aarch64
+          build-on: ubuntu-latest-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
