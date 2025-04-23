@@ -98,7 +98,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pkg-${{ matrix.rid }}
-          path: Build/*.pkg.tar.*
+          path: packaging/pkg/*.pkg.tar.*
 
   deb:
     needs: [prepare, get_version]
@@ -125,21 +125,25 @@ jobs:
         uses: actions/download-artifact@v4
         with:
             name: ${{ matrix.rid }}
-            path: packaging/deb
+            path: packaging/debian
 
-      - name: build deb package
-        working-directory: packaging/
+      - name: Prepare the build
+        working-directory: packaging/debian
         run: |
           tar -xzf dockedbackup-${{matrix.rid}}.tar.gz --strip-components=1
           mv dockedbackup.install.sh dockedbackup.postinst
           mv dockedbackup.remove.sh dockedbackup.prerm
+
+      - name: build deb package
+        working-directory: packaging/
+        run: |
           fakeroot debuild -us -uc
          
       - name: Upload deb package
         uses: actions/upload-artifact@v4
         with:
           name: deb-${{ matrix.rid }}
-          path: Build/*.pkg.tar.*
+          path: dockedbackup_*.deb
 
   # release:
   #   needs: [ arch-pkg ]
