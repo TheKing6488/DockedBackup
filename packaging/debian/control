@@ -1,9 +1,13 @@
-Package: dockedbackup
+Source: dockedbackup
 Section: utils
 Priority: optional
-Build-Depends: debhelper (>= 13)
-Architecture: all
-Package: dockedbackup
+Build-Depends: debhelper-compat (= 13)
 Maintainer: TheKing6488 <max@example.com>
+Homepage: https://github.com/TheKing6488/Kopia-Backup
+Standards-Version: 4.5.1
+Rules-Requires-Root: no
+
+Package: dockedbackup
+Architecture: any
 Depends: systemd
 Description: "This is a simple backup tool for offline backups."
