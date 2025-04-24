@@ -73,9 +73,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Cache pacman packages
+        uses: actions/cache@v3
+        with:
+          path: /var/cache/pacman/pkg
+          key: ${{ runner.os }}-pacman-${{ matrix.rid }}-${{ hashFiles('**/packaging/pkg/PKGBUILD') }}
+          restore-keys: |
+            ${{ runner.os }}-pacman-${{ matrix.rid }}-
 
       - name: Setup build environment
-        run: pacman -Syu --noconfirm --needed base-devel
+        run: pacman -Sy --noconfirm --needed base-devel
 
       - name: Create builder user
         run: |
@@ -116,10 +124,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Cache APT archive
+        uses: actions/cache@v3
+        with:
+          path: /var/cache/apt/archives
+          key: ${{ runner.os }}-apt-${{ matrix.rid }}-${{ env.VERSION }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
+
       - name: Setup build environment
         run: |
-          sudo apt update
-          sudo apt install -y build-essential dh-make devscripts debhelper
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends build-essential dh-make devscripts debhelper
 
       - name: Download Source‑Tarball
         uses: actions/download-artifact@v4
