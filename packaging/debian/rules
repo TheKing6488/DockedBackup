@@ -1,3 +1,11 @@
 #!/usr/bin/make -f
 %:
 	dh $@
+
+override_dh_auto_install:
+	# Helper‑Script
+	install -Dm755 debian/dockedbackup.sh debian/dockedbackup/usr/lib/dockedbackup/dockedbackup.sh 
+	# AOT-Binary
+	install -Dm755 debian/DockedBackup.Console debian/dockedbackup/usr/bin/dockedbackup
+	# systemd‑Unit
+	install -Dm644 debian/dockedbackup@.service debian/dockedbackup/usr/lib/systemd/system/dockedbackup@.service

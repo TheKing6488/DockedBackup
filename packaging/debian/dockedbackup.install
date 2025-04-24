@@ -1,3 +1,0 @@
-debian/dockedbackup.sh usr/lib/dockedbackup/
-debian/DockedBackup.Console usr/bin/dockedbackup
-debian/dockedbackup@.service usr/lib/systemd/system/
