@@ -8,7 +8,7 @@ public record MigrateRepositoryOptions
     [Option('s', "name", HelpText = "Name of the specific migration", Required = true)]
     public required string Name { get; set; }
     
-    [Option('s', "source-config", HelpText = "Specifies the file path to the source configuration file", Required = true)]
+    [Option("source-config", HelpText = "Specifies the file path to the source configuration file", Required = true)]
     public required string SourceConfig { get; set; }
     
     [Option('c', "config-file", HelpText = "Specifies the file path to the destination configuration file", Required = true)]

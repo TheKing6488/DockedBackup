@@ -4,7 +4,7 @@ using DockedBackup.Enums;
 namespace DockedBackup.Models.Kopia;
 
 [Verb("create", HelpText = "Establishing a connection to the repository")]
-public record CreateFilesystem
+public class CreateFilesystem
 {
     [Option('t', "type", HelpText = "Specifies the repository type (e.g., s3 = 0, filesystem = 1)", Required = true)]
     public required Provider Type { get; set; }
