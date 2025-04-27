@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . ./
 RUN dotnet restore
 
-RUN cd ./KopiaBackup.Console
+RUN cd ./DockedBackup
 RUN dotnet publish -c Release -r linux-x64 --self-contained true -o /app/publish
 
 FROM greyltc/archlinux-aur:latest
