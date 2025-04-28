@@ -5,7 +5,6 @@ RUN apt install -y clang
 WORKDIR /app
 
 COPY . ./
-RUN dotnet restore
 
 RUN cd ./DockedBackup
 RUN dotnet publish -c Release -r linux-x64 --self-contained true -o /app/publish

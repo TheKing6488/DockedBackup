@@ -10,7 +10,6 @@
         <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
         <InvariantGlobalization>true</InvariantGlobalization>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <PackageId>DockedBackup</PackageId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,34 +19,8 @@
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
       <PackageReference Include="Tmds.DBus.Protocol" Version="0.21.2" />
     </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Update="Resources\Resources.de.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Resources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Resources\Resources.de.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Resources.de.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Resources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Resources.resx</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
     <ItemGroup>
       <Folder Include="Docker Test\" />
-      <Folder Include="Interfaces\Commands\" />
     </ItemGroup>
 
 </Project>
