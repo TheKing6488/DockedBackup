@@ -60,6 +60,7 @@
 // await host.StopAsync(ct);
 
 
+using System.Diagnostics.CodeAnalysis;
 using CommandLine;
 using DockedBackup.Commands;
 using DockedBackup.DependencyInjection;

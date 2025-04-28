@@ -7,8 +7,9 @@ WORKDIR /app
 COPY . ./
 
 RUN cd ./DockedBackup
-RUN dotnet publish -c Release -r linux-x64 --self-contained true -o /app/publish
+RUN dotnet publish -c Release -r linux-x64 -p:PublishAot=true --self-contained true -o /app/publish
 
+# FROM ubuntu:latest
 FROM greyltc/archlinux-aur:latest
 
 RUN pacman -Syu --noconfirm
