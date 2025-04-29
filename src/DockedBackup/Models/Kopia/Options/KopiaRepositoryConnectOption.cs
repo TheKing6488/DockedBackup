@@ -1,10 +1,12 @@
-﻿using CommandLine;
+﻿using System.Diagnostics.CodeAnalysis;
+using CommandLine;
 using DockedBackup.Enums;
+using DockedBackup.Models.Kopia.Options;
 
-namespace DockedBackup.Models.Kopia;
+namespace DockedBackup.Models.Kopia.Options;
 
 [Verb("connect", HelpText = "Establishing a connection to the repository")]
-public record KopiaRepositoryConnect
+public record KopiaRepositoryConnectOption
 {
     [Option('t', "type", HelpText = "Specifies the repository type (e.g., S3 = 0, filesystem = 1)", Required = true)]
     public required Provider Type { get; set; }
@@ -26,4 +28,12 @@ public record KopiaRepositoryConnect
 
     [Option('c', "config-file", HelpText = "Specifies the path to the repository configuration file", Required = true)]
     public required string ConfigFile { get; set; }
+    
+
+    [DynamicDependency(
+        DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties,
+        typeof(KopiaRepositoryConnectOption))]
+    public KopiaRepositoryConnectOption()
+    {
+    }
 }

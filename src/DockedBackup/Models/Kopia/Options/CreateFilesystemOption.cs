@@ -1,17 +1,25 @@
-﻿using CommandLine;
+﻿using System.Diagnostics.CodeAnalysis;
+using CommandLine;
 using DockedBackup.Enums;
 
-namespace DockedBackup.Models.Kopia;
+namespace DockedBackup.Models.Kopia.Options;
 
 [Verb("create", HelpText = "Establishing a connection to the repository")]
-public class CreateFilesystem
+public class CreateFilesystemOption
 {
     [Option('t', "type", HelpText = "Specifies the repository type (e.g., s3 = 0, filesystem = 1)", Required = true)]
     public required Provider Type { get; set; }
-    
+
     [Option("path", HelpText = "Path to the new repository", Required = true)]
     public required string Path { get; set; }
 
     [Option('p', "password", HelpText = "Specifies the repository password", Required = true)]
     public required string Passwort { get; set; }
+
+    [DynamicDependency(
+        DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties,
+        typeof(CreateFilesystemOption))]
+    public CreateFilesystemOption()
+    {
+    }
 }

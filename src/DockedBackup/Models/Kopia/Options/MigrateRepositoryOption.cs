@@ -1,9 +1,10 @@
-﻿using CommandLine;
+﻿using System.Diagnostics.CodeAnalysis;
+using CommandLine;
 
 namespace DockedBackup.Models.Kopia.Options;
 
 [Verb("migrate", HelpText = "Establishing a connection to the repository")]
-public record MigrateRepositoryOptions
+public record MigrateRepositoryOption
 {
     [Option('s', "name", HelpText = "Name of the specific migration", Required = true)]
     public required string Name { get; set; }
@@ -16,4 +17,11 @@ public record MigrateRepositoryOptions
     
     [Option('p', "password", HelpText = "Specifies the repository password", Required = true)]
     public required string Passwort { get; set; }
+    
+    [DynamicDependency(
+        DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties,
+        typeof(MigrateRepositoryOption))]
+    public MigrateRepositoryOption()
+    {
+    }
 }

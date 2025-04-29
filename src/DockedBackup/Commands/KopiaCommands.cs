@@ -9,18 +9,18 @@ namespace DockedBackup.Commands;
 // TODO change to a instance for better handling and interface support
 public class KopiaCommands(IKopiaHelper kopiaHelper)
 {
-    public async Task<int> RunCreateExternalS3ConfigAsync(KopiaRepositoryConnect kopiaRepositoryConnect, CancellationToken cancellationToken)
+    public async Task<int> RunCreateExternalS3ConfigAsync(KopiaRepositoryConnectOption kopiaRepositoryConnectOption, CancellationToken cancellationToken)
     {
         var s3Credentials = new S3Credentials(
-            kopiaRepositoryConnect.Bucket,
-            kopiaRepositoryConnect.Endpoint,
-            kopiaRepositoryConnect.AccessKey,
-            kopiaRepositoryConnect.SecretAccessKey,
-            kopiaRepositoryConnect.Passwort,
-            kopiaRepositoryConnect.ConfigFile
+            kopiaRepositoryConnectOption.Bucket,
+            kopiaRepositoryConnectOption.Endpoint,
+            kopiaRepositoryConnectOption.AccessKey,
+            kopiaRepositoryConnectOption.SecretAccessKey,
+            kopiaRepositoryConnectOption.Passwort,
+            kopiaRepositoryConnectOption.ConfigFile
         );
 
-        switch (kopiaRepositoryConnect.Type)
+        switch (kopiaRepositoryConnectOption.Type)
         {
             case Provider.S3:
                 var output = await kopiaHelper.CreateExternalS3ConfigAsync(s3Credentials, cancellationToken);
@@ -30,26 +30,26 @@ public class KopiaCommands(IKopiaHelper kopiaHelper)
         return 0;
     }
     
-    public async Task<int> RunAddKopiaMigrationAsync(MigrateRepositoryOptions migrateRepositoryOptions, CancellationToken cancellationToken)
+    public async Task<int> RunAddKopiaMigrationAsync(MigrateRepositoryOption migrateRepositoryOption, CancellationToken cancellationToken)
     {
         var migrateCredentialsStore = new MigrateCredentialsStore
         {
-            Name = migrateRepositoryOptions.Name,
-            SourceConfig = migrateRepositoryOptions.SourceConfig,
-            ConfigFile = migrateRepositoryOptions.ConfigFile,
-            Password = migrateRepositoryOptions.Passwort
+            Name = migrateRepositoryOption.Name,
+            SourceConfig = migrateRepositoryOption.SourceConfig,
+            ConfigFile = migrateRepositoryOption.ConfigFile,
+            Password = migrateRepositoryOption.Passwort
         };
         kopiaHelper.AddKopiaMigration(migrateCredentialsStore, cancellationToken);
         return 0;
     }
-    public async Task<int> RunCreateRepositoryAsync(CreateFilesystem createFilesystem, CancellationToken cancellationToken)
+    public async Task<int> RunCreateRepositoryAsync(CreateFilesystemOption createFilesystemOption, CancellationToken cancellationToken)
     {
         var filesystemCredentials = new FilesystemCredentials(
-            createFilesystem.Path,
-            createFilesystem.Passwort
+            createFilesystemOption.Path,
+            createFilesystemOption.Passwort
         );
 
-        switch (createFilesystem.Type)
+        switch (createFilesystemOption.Type)
         {
             case Provider.Filesystem:
                 var output = await kopiaHelper.CreateRepositoryFilesystemAsync(filesystemCredentials, cancellationToken);
@@ -58,14 +58,14 @@ public class KopiaCommands(IKopiaHelper kopiaHelper)
         }
         return 0;
     }
-    public async Task<int> RunMigrateRepositoryAsync(MigrateRepositoryOptions migrateRepositoryOptions, CancellationToken cancellationToken)
+    public async Task<int> RunMigrateRepositoryAsync(MigrateRepositoryOption migrateRepositoryOption, CancellationToken cancellationToken)
     {
         var migrateCredentials = new MigrateCredentialsStore
         {
-            Name = migrateRepositoryOptions.Name,
-            SourceConfig = migrateRepositoryOptions.SourceConfig,
-            ConfigFile = migrateRepositoryOptions.ConfigFile,
-            Password = migrateRepositoryOptions.Passwort
+            Name = migrateRepositoryOption.Name,
+            SourceConfig = migrateRepositoryOption.SourceConfig,
+            ConfigFile = migrateRepositoryOption.ConfigFile,
+            Password = migrateRepositoryOption.Passwort
         };
 
         var output = await kopiaHelper.MigrateRepositoryAsync(migrateCredentials, cancellationToken);

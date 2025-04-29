@@ -1,5 +1,6 @@
 ﻿using DockedBackup.Models.Backups;
 using DockedBackup.Interfaces.Services;
+using DockedBackup.Models.Backups.Options;
 
 namespace DockedBackup.Commands;
 
@@ -7,7 +8,7 @@ namespace DockedBackup.Commands;
 
 public class BackupCommands
 {
-    public static int RunAddBackupTask(IBackupService backupService, BackupTask backupTask)
+    public async Task<int> RunAddBackupTaskAsync(BackupTaskOption backupTaskOption, CancellationToken cancellationToken)
     {
         //TODO fix this funktion
         // var backupTaskLib = new BackupTask

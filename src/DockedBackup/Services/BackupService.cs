@@ -23,10 +23,10 @@ public class BackupService(ISettingsManager settingsManager, IKopiaHelper kopiaH
         File.WriteAllText(FullPath(devicePath), jsonString);
     }
 
-    public void AddBackupTask(BackupTaskTest backupTaskTest)
+    public void AddBackupTask(BackupTask backupTask)
     {
         var settings = settingsManager.GetUserSettings();
-        settings.BackupTasks.Add(backupTaskTest);
+        settings.BackupTasks.Add(backupTask);
         settingsManager.SaveUserSettings(settings);
     }
 

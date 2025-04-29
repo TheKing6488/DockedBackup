@@ -14,8 +14,9 @@ public static class ServiceCollectionExtensions
     public static void AddDockedBackupServices(this IServiceCollection services)
     {
         //Commands
-        // services.AddSingleton<SystemdCommands>();
+        services.AddSingleton<SystemdCommands>();
         services.AddSingleton<KopiaCommands>();
+        services.AddSingleton<BackupCommands>();
         
         //Helpers
         services.AddSingleton<IKopiaHelper, KopiaHelper>();

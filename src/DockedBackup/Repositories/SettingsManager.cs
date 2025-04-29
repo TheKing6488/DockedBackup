@@ -26,7 +26,7 @@ public class SettingsManager : ISettingsManager
             }
             else
             {
-                IList<BackupTaskTest> backupTasks = new List<BackupTaskTest>();
+                IList<BackupTask> backupTasks = new List<BackupTask>();
                 IList<MigrateCredentialsStore> migrateCredentialsStores = new List<MigrateCredentialsStore>();
                 return new UserSettings(backupTasks, migrateCredentialsStores);
             }

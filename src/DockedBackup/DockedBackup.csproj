@@ -19,8 +19,4 @@
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
       <PackageReference Include="Tmds.DBus.Protocol" Version="0.21.2" />
     </ItemGroup>
-    
-    <ItemGroup>
-        <TrimmerRootDescriptor Include="NativeAotConfiguration.xml" />
-    </ItemGroup>
 </Project>

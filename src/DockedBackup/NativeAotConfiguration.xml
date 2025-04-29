@@ -1,6 +1,0 @@
-<linker>
-    <assembly fullname="DockedBackup">
-        <type fullname="DockedBackup.Models.Systemctl.Options.SystemctlOptions"
-              preserve="constructors,properties" />
-    </assembly>
-</linker>

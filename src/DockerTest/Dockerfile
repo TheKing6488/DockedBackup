@@ -7,14 +7,24 @@ WORKDIR /app
 COPY . ./
 
 RUN cd ./DockedBackup
-RUN dotnet publish -c Release -r linux-x64 -p:PublishAot=true --self-contained true -o /app/publish
+RUN dotnet publish -c Release -r linux-x64 -p:PublishAot=true -p:PublishTrimmed=true --self-contained true -o /app/publish
 
-# FROM ubuntu:latest
-FROM greyltc/archlinux-aur:latest
 
-RUN pacman -Syu --noconfirm
-RUN pacman -S --noconfirm rclone
-RUN aur-install aur-kopia
+#  FROM ubuntu:latest
+FROM ubuntu:latest
+
+# 1. DBus installieren
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y dbus \
+    && rm -rf /var/lib/apt/lists/*
+
+CMD ["dbus-daemon", "--system", "--nofork", "--nopidfile"]
+
+# FROM greyltc/archlinux-aur:latest
+
+# RUN pacman -Syu --noconfirm
+# RUN pacman -S --noconfirm rclone
+# RUN aur-install aur-kopia
 
 WORKDIR /app
 
