@@ -6,7 +6,7 @@ using DockedBackup.Models.Kopia.Options;
 namespace DockedBackup.Models.Kopia.Options;
 
 [Verb("connect", HelpText = "Establishing a connection to the repository")]
-public record KopiaRepositoryConnectOption
+public class KopiaRepositoryConnectOption
 {
     [Option('t', "type", HelpText = "Specifies the repository type (e.g., S3 = 0, filesystem = 1)", Required = true)]
     public required Provider Type { get; set; }

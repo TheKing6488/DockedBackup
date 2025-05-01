@@ -72,7 +72,7 @@ public class KopiaCommands(IKopiaHelper kopiaHelper)
         Console.WriteLine(output);
         return 0;
     }
-    public async Task<int> RunGetAllKopiaMigrationsAsync(GetKopiaCredentialsOptions getKopiaCredentialsOptions, CancellationToken cancellationToken)
+    public async Task<int> RunGetAllKopiaMigrationsAsync(GetKopiaCredentialsOption getKopiaCredentialsOptions, CancellationToken cancellationToken)
     {
         var output = kopiaHelper.GetAllKopiaMigrateConfigs();
 

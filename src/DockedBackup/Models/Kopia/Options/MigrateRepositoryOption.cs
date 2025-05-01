@@ -4,7 +4,7 @@ using CommandLine;
 namespace DockedBackup.Models.Kopia.Options;
 
 [Verb("migrate", HelpText = "Establishing a connection to the repository")]
-public record MigrateRepositoryOption
+public class MigrateRepositoryOption
 {
     [Option('s', "name", HelpText = "Name of the specific migration", Required = true)]
     public required string Name { get; set; }
