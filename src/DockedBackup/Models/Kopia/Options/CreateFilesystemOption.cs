@@ -15,11 +15,4 @@ public class CreateFilesystemOption
 
     [Option('p', "password", HelpText = "Specifies the repository password", Required = true)]
     public required string Passwort { get; set; }
-
-    [DynamicDependency(
-        DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties,
-        typeof(CreateFilesystemOption))]
-    public CreateFilesystemOption()
-    {
-    }
 }

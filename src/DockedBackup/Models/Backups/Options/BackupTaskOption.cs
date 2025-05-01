@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using CommandLine;
+﻿using CommandLine;
 
 namespace DockedBackup.Models.Backups.Options;
 
@@ -17,11 +16,4 @@ public class BackupTaskOption
     //TODO erstelle einen besseren hilfe Text
     [Option('a', "access-data-id", HelpText = "Represents the unique GUID for access data", Required = true)]
     public required Guid AccessDataId { get; set; }
-
-    [DynamicDependency(
-        DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties,
-        typeof(BackupTaskOption))]
-    public BackupTaskOption()
-    {
-    }
 }

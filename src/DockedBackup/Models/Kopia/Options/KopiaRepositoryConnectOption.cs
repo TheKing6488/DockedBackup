@@ -28,12 +28,4 @@ public class KopiaRepositoryConnectOption
 
     [Option('c', "config-file", HelpText = "Specifies the path to the repository configuration file", Required = true)]
     public required string ConfigFile { get; set; }
-    
-
-    [DynamicDependency(
-        DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties,
-        typeof(KopiaRepositoryConnectOption))]
-    public KopiaRepositoryConnectOption()
-    {
-    }
 }

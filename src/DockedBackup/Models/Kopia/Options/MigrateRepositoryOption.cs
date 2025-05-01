@@ -17,11 +17,4 @@ public class MigrateRepositoryOption
     
     [Option('p', "password", HelpText = "Specifies the repository password", Required = true)]
     public required string Passwort { get; set; }
-    
-    [DynamicDependency(
-        DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicProperties,
-        typeof(MigrateRepositoryOption))]
-    public MigrateRepositoryOption()
-    {
-    }
 }

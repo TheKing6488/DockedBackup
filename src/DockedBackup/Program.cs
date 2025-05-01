@@ -22,20 +22,20 @@ var kopiaCommands = host.Services.GetRequiredService<KopiaCommands>();
 
 await Parser.Default
     .ParseArguments<
-        // KopiaRepositoryConnectOption,
-        // CreateFilesystemOption,
-        // MigrateRepositoryOption,
-        // BackupTaskOption,
+        KopiaRepositoryConnectOption,
+        CreateFilesystemOption,
+        MigrateRepositoryOption,
+        BackupTaskOption,
         GetKopiaCredentialsOption, 
         SystemctlOption
     >(args)
     .MapResult(
-        // (KopiaRepositoryConnectOption kopiaRepositoryConnect) =>
-        // kopiaCommands.RunCreateExternalS3ConfigAsync(kopiaRepositoryConnect, ct),
-        // (CreateFilesystemOption createFilesystem) => kopiaCommands.RunCreateRepositoryAsync(createFilesystem, ct),
-        // (MigrateRepositoryOption migrateRepositoryOptions) =><
-        //     kopiaCommands.RunAddKopiaMigrationAsync(migrateRepositoryOptions, ct),
-        // (BackupTaskOption backupTaskOptions) => backupCommands.RunAddBackupTaskAsync(backupTaskOptions, ct),
+        (KopiaRepositoryConnectOption kopiaRepositoryConnect) =>
+        kopiaCommands.RunCreateExternalS3ConfigAsync(kopiaRepositoryConnect, ct),
+        (CreateFilesystemOption createFilesystem) => kopiaCommands.RunCreateRepositoryAsync(createFilesystem, ct),
+        (MigrateRepositoryOption migrateRepositoryOption) =>
+            kopiaCommands.RunAddKopiaMigrationAsync(migrateRepositoryOption, ct),
+        (BackupTaskOption backupTaskOptions) => backupCommands.RunAddBackupTaskAsync(backupTaskOptions, ct),
         (GetKopiaCredentialsOption getKopiaCredentialsOption) =>
         kopiaCommands.RunGetAllKopiaMigrationsAsync(getKopiaCredentialsOption, ct),
         (SystemctlOption systemctlOptions) => systemdCommands.CreateSystemdAsync(systemctlOptions, ct),

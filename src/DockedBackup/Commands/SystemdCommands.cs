@@ -10,20 +10,20 @@ public  class SystemdCommands
 {
     public async Task<int> CreateSystemdAsync(SystemctlOption systemctlOption, CancellationToken cancellationToken)
     {
-        var instance = $"dockedbackup@{systemctlOption.DeviceId}.service";
-        
-        var connection = new Connection(Address.System!);
-        await connection.ConnectAsync();
-    
-        var systemdManagerHelper = new SystemdManagerHelper(connection);
-        await systemdManagerHelper.ReloadAsync();
-    
-        await systemdManagerHelper.EnableUnitAsync(instance, runtime: false, force: true);
-        Console.WriteLine($"Enabled {instance}");
-    
-        var jobPath = await systemdManagerHelper.StartUnitAsync(instance, "replace");
-        Console.WriteLine($"Started {instance}, job: {jobPath}");
-    
-        return 0;
+        // var instance = $"dockedbackup@{systemctlOption.DeviceId}.service";
+        //
+        // var connection = new Connection(Address.System!);
+        // await connection.ConnectAsync();
+        //
+        // var systemdManagerHelper = new SystemdManagerHelper(connection);
+        // await systemdManagerHelper.ReloadAsync();
+        //
+        // await systemdManagerHelper.EnableUnitAsync(instance, runtime: false, force: true);
+        // Console.WriteLine($"Enabled {instance}");
+        //
+        // var jobPath = await systemdManagerHelper.StartUnitAsync(instance, "replace");
+        // Console.WriteLine($"Started {instance}, job: {jobPath}");
+        //
+        // return 0;
     }
 }

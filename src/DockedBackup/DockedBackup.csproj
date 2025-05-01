@@ -5,7 +5,6 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PublishAot>true</PublishAot>
         <SelfContained>true</SelfContained>
         <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
         <InvariantGlobalization>true</InvariantGlobalization>
@@ -17,6 +16,6 @@
       <PackageReference Include="CommandLineParser" Version="2.9.1" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.4" />
-      <PackageReference Include="Tmds.DBus.Protocol" Version="0.21.2" />
+      <PackageReference Include="Tmds.DBus" Version="0.21.2" />
     </ItemGroup>
 </Project>

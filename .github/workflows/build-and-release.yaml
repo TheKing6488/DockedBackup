@@ -42,7 +42,7 @@ jobs:
 
       - name: Publish for ${{ matrix.rid }}
         working-directory: src/DockedBackup.Console
-        run: dotnet publish -r ${{ matrix.rid }} -c Release --self-contained -p:PublishAot=true -o publish/
+        run: dotnet publish -r ${{ matrix.rid }} -c Release --self-contained -o publish/
 
       - name: Copy Service & Scripts
         run: cp build/* src/DockedBackup.Console/publish

@@ -3,7 +3,6 @@ using DockedBackup.Interfaces.Repositories;
 using DockedBackup.Models;
 using DockedBackup.Models.Backups;
 using DockedBackup.Models.Kopia;
-using DockedBackup.Serialization;
 
 namespace DockedBackup.Repositories;
 
@@ -21,7 +20,7 @@ public class SettingsManager : ISettingsManager
             if (File.Exists(SettingsFileName))
             {
                 var json = File.ReadAllText(SettingsFileName);
-                return JsonSerializer.Deserialize(json, MyJsonContext.Default.UserSettings) ??
+                return JsonSerializer.Deserialize<UserSettings>(json) ??
                        throw new NullReferenceException("UserSettings is null");
             }
             else
@@ -46,7 +45,7 @@ public class SettingsManager : ISettingsManager
         try
         {
             FileMutex.WaitOne();
-            var json = JsonSerializer.Serialize(userSettings, MyJsonContext.Default.UserSettings);
+            var json = JsonSerializer.Serialize(userSettings);
             File.WriteAllText(SettingsFileName, json);
         }
         catch (Exception ex)
