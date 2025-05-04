@@ -1,29 +1,23 @@
-using DockedBackup.Helpers;
-using DockedBackup.Models.Kopia;
-using DockedBackup.Models.Kopia.Options;
+using System.Text;
+using DockedBackup.Enums;
+using DockedBackup.Interfaces.Helpers;
 using DockedBackup.Models.Systemctl.Options;
-using Tmds.DBus.Protocol;
 
 namespace DockedBackup.Commands;
 
-public  class SystemdCommands
+public  class SystemdCommands(ISystemdManagerHelper systemdManagerHelper)
 {
-    public async Task<int> CreateSystemdAsync(SystemctlOption systemctlOption, CancellationToken cancellationToken)
+    public async Task<int> EnableSystemdAsync(SystemctlOption systemctlOption, CancellationToken cancellationToken)
     {
-        // var instance = $"dockedbackup@{systemctlOption.DeviceId}.service";
-        //
-        // var connection = new Connection(Address.System!);
-        // await connection.ConnectAsync();
-        //
-        // var systemdManagerHelper = new SystemdManagerHelper(connection);
-        // await systemdManagerHelper.ReloadAsync();
-        //
-        // await systemdManagerHelper.EnableUnitAsync(instance, runtime: false, force: true);
-        // Console.WriteLine($"Enabled {instance}");
-        //
-        // var jobPath = await systemdManagerHelper.StartUnitAsync(instance, "replace");
-        // Console.WriteLine($"Started {instance}, job: {jobPath}");
-        //
-        // return 0;
+        var result = systemctlOption.SystemctlAction switch
+        {
+            SystemctlAction.start => await systemdManagerHelper.StartSystemctlService(systemctlOption),
+            SystemctlAction.enable => await systemdManagerHelper.EnableSystemctlService(systemctlOption),
+            SystemctlAction.disable => await systemdManagerHelper.DisableSystemctlService(systemctlOption),
+            SystemctlAction.status => await systemdManagerHelper.StatusSystemctlService(systemctlOption),
+            _ => $"{systemctlOption.SystemctlAction} is unsupported"
+        };
+        Console.WriteLine(result);
+        return 0;
     }
 }

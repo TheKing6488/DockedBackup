@@ -38,7 +38,7 @@ await Parser.Default
         (BackupTaskOption backupTaskOptions) => backupCommands.RunAddBackupTaskAsync(backupTaskOptions, ct),
         (GetKopiaCredentialsOption getKopiaCredentialsOption) =>
         kopiaCommands.RunGetAllKopiaMigrationsAsync(getKopiaCredentialsOption, ct),
-        (SystemctlOption systemctlOptions) => systemdCommands.CreateSystemdAsync(systemctlOptions, ct),
+        (SystemctlOption systemctlOptions) => systemdCommands.EnableSystemdAsync(systemctlOptions, ct),
         _ => Task.FromResult(1)
     );
 

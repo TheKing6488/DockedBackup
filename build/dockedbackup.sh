@@ -1,3 +1,5 @@
+# TODO Update script to use a id not the name
+
 #!/bin/bash
 set -e
 

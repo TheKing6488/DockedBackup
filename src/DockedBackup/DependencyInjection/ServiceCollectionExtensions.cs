@@ -21,7 +21,7 @@ public static class ServiceCollectionExtensions
         //Helpers
         services.AddSingleton<IKopiaHelper, KopiaHelper>();
         services.AddSingleton<IRcloneHelper, RcloneHelper>();
-        services.AddSingleton<ISystemctlHelper, SystemctlHelper>();
+        services.AddSingleton<ISystemdManagerHelper, SystemdManagerHelper>();
 
         //Services
         services.AddSingleton<ISettingsManager, SettingsManager>();
