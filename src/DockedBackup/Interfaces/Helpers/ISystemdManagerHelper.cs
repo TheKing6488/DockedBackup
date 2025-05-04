@@ -8,7 +8,7 @@ public interface ISystemdManagerHelper
     Task<string> EnableSystemctlService(SystemctlOption systemctlOption);
     Task<string> DisableSystemctlService(SystemctlOption systemctlOption);
     Task<string> StartSystemctlService(SystemctlOption systemctlOption);
-    Task<string> StatusSystemctlService(SystemctlOption systemctlOption);
+    Task<string> StatusSystemctlService(SystemctlOption systemctlOption, CancellationToken cancellationToken);
     
     //All Services
     Task<string> EnableAllSystemctlServices(SystemctlOption systemctlOption);

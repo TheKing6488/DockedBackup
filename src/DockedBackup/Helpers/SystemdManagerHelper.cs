@@ -1,3 +1,5 @@
+using CliWrap;
+using CliWrap.Buffered;
 using DockedBackup.Interfaces.DBus;
 using DockedBackup.Interfaces.Helpers;
 using DockedBackup.Models.Systemctl.Options;
@@ -23,7 +25,6 @@ public class SystemdManagerHelper : ISystemdManagerHelper
 
         return $"{unitName} started";
     }
-
 
     public async Task<string> EnableSystemctlService(SystemctlOption systemctlOption)
     {
@@ -75,35 +76,28 @@ public class SystemdManagerHelper : ISystemdManagerHelper
     }
 
 
-    public async Task<string> StatusSystemctlService(SystemctlOption systemctlOption)
+    public async Task<string> StatusSystemctlService(SystemctlOption systemctlOption, CancellationToken cancellationToken)
     {
-        var conn = new Connection(Address.System);
-        await conn.ConnectAsync();
+        var args = new[]
+        {
+            "status", systemctlOption.DeviceId
+        };
+        
+        var cmd = Cli.Wrap("systemctl")
+            .WithArguments(args)
+            .WithValidation(CommandResultValidation.None);
 
-        var manager = conn.CreateProxy<IManager>(
-            "org.freedesktop.systemd1",
-            "/org/freedesktop/systemd1");
-
-        // lädt die Unit und bekommt ihren Objektpfad
-        var unitPath = await manager.LoadUnitAsync("dockedbackup@test.service");
-
-        var unit = conn.CreateProxy<IUnit>(
-            "org.freedesktop.systemd1",
-            unitPath);
-
-        // Properties auslesen
-        string desc      = await unit.DescriptionAsync();
-        string active    = await unit.ActiveStateAsync();
-        string sub       = await unit.SubStateAsync();
-        uint   pid       = await unit.MainPIDAsync();
-        ulong  startedMs = await unit.ExecMainStartTimestampAsync();
-
-        Console.WriteLine($"Unit: dockedbackup@test.service");
-        Console.WriteLine($"  Description: {desc}");
-        Console.WriteLine($"  Active: {active} ({sub})");
-        Console.WriteLine($"  PID: {pid}");
-        Console.WriteLine($"  Started: {DateTimeOffset.FromUnixTimeMilliseconds((long)startedMs)}");
-        return "";
+        try
+        {
+            var result = await cmd.ExecuteBufferedAsync(cancellationToken);
+            
+            return !string.IsNullOrWhiteSpace(result.StandardError) ? result.StandardError : result.StandardOutput;
+        }
+        catch (OperationCanceledException)
+        {
+            return "The process was canceled.";
+        }
+        
     }
 
     public Task<string> EnableAllSystemctlServices(SystemctlOption systemctlOption)

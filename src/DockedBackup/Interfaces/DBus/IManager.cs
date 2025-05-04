@@ -6,16 +6,8 @@ namespace DockedBackup.Interfaces.DBus;
 public interface IManager : IDBusObject
 {
     Task<ObjectPath> StartUnitAsync(string unit, string mode);
-
     Task<(bool carriesInstallInfo, (string origFile, string linkedFile, string state)[] changes)>
         EnableUnitFilesAsync(string[] files, bool runtime, bool force);
-
     Task<(string origFile, string linkedFile, string state)[]>
         DisableUnitFilesAsync(string[] files, bool runtime);
-    
-    // Lädt eine Unit und gibt ihren Objektpfad zurück
-    Task<ObjectPath> LoadUnitAsync(string name);
-
-    // Listet alle Units auf
-    Task<(string[] Names, ObjectPath[] Paths)[]> ListUnitsAsync();
 }

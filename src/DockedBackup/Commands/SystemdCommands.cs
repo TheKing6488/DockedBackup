@@ -14,7 +14,7 @@ public  class SystemdCommands(ISystemdManagerHelper systemdManagerHelper)
             SystemctlAction.start => await systemdManagerHelper.StartSystemctlService(systemctlOption),
             SystemctlAction.enable => await systemdManagerHelper.EnableSystemctlService(systemctlOption),
             SystemctlAction.disable => await systemdManagerHelper.DisableSystemctlService(systemctlOption),
-            SystemctlAction.status => await systemdManagerHelper.StatusSystemctlService(systemctlOption),
+            SystemctlAction.status => await systemdManagerHelper.StatusSystemctlService(systemctlOption, cancellationToken),
             _ => $"{systemctlOption.SystemctlAction} is unsupported"
         };
         Console.WriteLine(result);

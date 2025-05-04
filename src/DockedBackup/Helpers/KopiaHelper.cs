@@ -82,7 +82,7 @@ public class KopiaHelper(ISettingsManager settingsManager) : IKopiaHelper
         try
         {
             var result = await cmd.ExecuteBufferedAsync(cancellationToken);
-            return result.ExitCode != 0 ? result.StandardError : result.StandardOutput;
+            return !string.IsNullOrWhiteSpace(result.StandardError) ? result.StandardError : result.StandardOutput;
         }
         catch (OperationCanceledException)
         {
