@@ -1,11 +1,12 @@
 using System.Text;
 using DockedBackup.Enums;
+using DockedBackup.Interfaces.Commands;
 using DockedBackup.Interfaces.Helpers;
 using DockedBackup.Models.Systemctl.Options;
 
 namespace DockedBackup.Commands;
 
-public  class SystemdCommands(ISystemdManagerHelper systemdManagerHelper)
+public class SystemdCommands(ISystemdManagerHelper systemdManagerHelper) : ISystemdCommands
 {
     public async Task<int> EnableSystemdAsync(SystemctlOption systemctlOption, CancellationToken cancellationToken)
     {

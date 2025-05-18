@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockedBackup", "DockedBackup\DockedBackup.csproj", "{EB72B464-39EF-4F1D-888C-6EC395975145}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockedBackup.Tests", "DockedBackup.Tests\DockedBackup.Tests.csproj", "{8112F2DE-30B4-4400-BFC5-957D98367DA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockedBackupTests", "DockedBackupTests\DockedBackupTests.csproj", "{8112F2DE-30B4-4400-BFC5-957D98367DA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

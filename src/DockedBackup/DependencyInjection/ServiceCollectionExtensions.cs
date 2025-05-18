@@ -1,5 +1,6 @@
 ﻿using DockedBackup.Commands;
 using DockedBackup.Helpers;
+using DockedBackup.Interfaces.Commands;
 using DockedBackup.Interfaces.Helpers;
 using DockedBackup.Interfaces.Repositories;
 using DockedBackup.Interfaces.Services;
@@ -14,7 +15,7 @@ public static class ServiceCollectionExtensions
     public static void AddDockedBackupServices(this IServiceCollection services)
     {
         //Commands
-        services.AddSingleton<SystemdCommands>();
+        services.AddSingleton<ISystemdCommands, SystemdCommands>();
         services.AddSingleton<KopiaCommands>();
         services.AddSingleton<BackupCommands>();
         

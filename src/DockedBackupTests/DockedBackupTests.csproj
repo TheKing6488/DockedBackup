@@ -5,6 +5,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
+        <AssemblyName>DockedBackupTests</AssemblyName>
+        <RootNamespace>DockedBackupTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
