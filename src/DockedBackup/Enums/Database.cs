@@ -2,7 +2,7 @@ using System.Runtime.Serialization;
 
 namespace DockedBackup.Enums;
 
-public enum Databases
+public enum Database
 {
     [EnumMember(Value = "postgresql")]
     PostgreSql,
